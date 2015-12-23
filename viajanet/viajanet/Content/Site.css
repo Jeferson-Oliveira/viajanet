@@ -1,12 +1,12 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -22,3 +22,66 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.logo {
+    font-size: 21px;
+    color: #2e2e2e;
+    margin-top: 15px;
+    text-transform: uppercase;
+}
+
+.logo:hover, a.logo:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+.logo span {
+    color: #FF6C60;
+}
+
+
+/*
+    original 
+
+
+    body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.logo {
+    font-size: 21px;
+    color: #2e2e2e;
+    margin-top: 15px;
+    text-transform: uppercase;
+}
+
+.logo:hover, a.logo:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+.logo span {
+    color: #FF6C60;
+}
+
+*/
+
