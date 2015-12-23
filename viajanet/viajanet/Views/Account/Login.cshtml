@@ -65,7 +65,14 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @Html.CheckBoxFor(m => m.RememberMe)
+                                        @Html.LabelFor(m => m.RememberMe,"Lembre-me")
+                                    </div>
+                                </div>
+                            </div>
                             <div class="panel-footer">
                                 <div class="clearfix">
                                     @Html.ActionLink("Cadastre-se", "Register", "Account", new { @class = "btn btn-success pull-left" })

@@ -84,7 +84,7 @@ namespace viajanet.Controllers
             options.Append("<option value=''>Selecione sua cidade </option>");
             foreach (var cid in cidades)
             {
-                options.Append("<option value=' " + cid.Id + " '>" + cid.Nome + "</option>");
+                options.Append("<option value='" + cid.Id + "'>" + cid.Nome + "</option>");
             }
             return Content(options.ToString());
 

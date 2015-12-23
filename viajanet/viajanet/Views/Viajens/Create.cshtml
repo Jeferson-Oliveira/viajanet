@@ -1,0 +1,222 @@
+﻿@model viajanet.Models.Viajem
+
+@{
+    ViewBag.Title = "Cadastro de viagens";
+}
+
+
+
+
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Viajem</h4>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-horizontal">
+               
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @Html.LabelFor(model => model.FK_Estado_Saida, "Estado de Saída", htmlAttributes: new { @class = "control-label" })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-map"></i>
+                            </span>
+                            @Html.DropDownList("FK_Estado_Saida", null, htmlAttributes: new { @class = "form-control", @id = "estados-saida" })
+                            @Html.ValidationMessageFor(model => model.FK_Estado_Saida, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @Html.LabelFor(model => model.FK_Cidade_Saida, "Cidade de Saída", htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-map-marker"></i>
+                        </span>
+                        <select id="cidades-saida" class="form-control" name="FK_Cidade_Saida" required>
+                            <option value="">Selecione o estado</option>
+                        </select>
+                        @Html.ValidationMessageFor(model => model.FK_Cidade_Saida, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @Html.LabelFor(model => model.Data_Ida,"Data de ida", htmlAttributes: new { @class = "control-label" })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                           <input id="Data_Ida" type="text" name="Data_Ida" class="datepicker form-control" placeholder="Data de Ida"  required/>
+                            @Html.ValidationMessageFor(model => model.Data_Ida, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @Html.LabelFor(model => model.Valor,"Valor", htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-money"></i>
+                        </span>
+                        @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" , @placeholder = "Valor"} })
+                        @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-xs-12">
+                       <label for="estados-destino" class="control-label">Estado de Destino</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-map"></i>
+                            </span>
+                            @Html.DropDownList("FK_Estado_Destino", null, htmlAttributes: new { @class = "form-control", @id = "estados-destino" })
+                            @Html.ValidationMessageFor(model => model.FK_Estado_Destino, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <label for="cidades-destino" class="control-label">Cidade de destino</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-map-marker"></i>
+                            </span>
+                            <select id="cidades-destino" class="form-control" name="FK_Cidade_Destino" required>
+                                <option value="">Selecione o estado</option>
+                            </select>
+                            @Html.ValidationMessageFor(model => model.FK_Cidade_Destino, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @Html.LabelFor(model => model.Data_Volta, "Data de volta",htmlAttributes: new { @class = "control-label" })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                            <input id="Data_Volta" type="text" name="Data_Volta" class="datepicker form-control" placeholder="Data de Volta" required />
+                            @Html.ValidationMessageFor(model => model.Data_Volta, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @Html.LabelFor(model => model.FK_Companhia,"Companhia",htmlAttributes: new { @class = "control-label" })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-plane"></i>
+                            </span>
+                            @Html.DropDownList("FK_Companhia", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.FK_Companhia, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="pull-right">
+                    <input id="reset" type="reset" value="Apagar campos" class="btn btn-danger" />
+                    <input type="submit" value="Cadastar" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    <!--Start datepicket request-->
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker-globalize.js"></script>
+    <script src="~/Scripts/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datepicker3.css" rel="stylesheet" />
+    <!--End DatePicket request -->
+    
+    <script>
+        $(document).ready(function () {
+            $("#reset").click(function () {
+                $("#cidades-destino , #cidades-saida").empty();
+                $("#cidades-destino , #cidades-saida").prepend("<option value='' selected >Selecione o Estado </option>");
+            });
+                $('.datepicker').datepicker({
+                    format: "dd/mm/yyyy",
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    language: "pt-BR",
+                    orientation: "top auto",
+                    multidate: false,
+                    autoclose: true,
+                    todayHighlight: true
+                });
+
+                $("#estados-saida , #estados-destino").prepend("<option value='' selected >Selecione o Estado </option>");
+
+                $("#estados-saida").change(function () {
+                    estAtual = $("#estados-saida").val();
+                    if (estAtual != "") {
+                        $("#cidades-saida").empty();
+
+                        $.ajax({
+                            type: "Post",
+                            url: "/Viajens/obterCidades/",
+                            data: { "id": estAtual },
+                            datatype: "Json",
+                            success: function (data) {
+                                $("#cidades-saida").append(data);
+                            }
+                        });
+                    } else {
+                        $("#cidades-saida").empty();
+                        $("#cidades-saida").prepend("<option value='' selected >Selecione o Estado </option>");
+                    }
+
+                });
+
+                $("#estados-destino").change(function () {
+
+                    estAtual = $("#estados-destino").val();
+                    if (estAtual != "") {
+                        $("#cidades-destino").empty();
+
+                        $.ajax({
+                            type: "Post",
+                            url: "/Viajens/obterCidades/",
+                            data: { "id": estAtual },
+                            datatype: "Json",
+                            success: function (data) {
+                                $("#cidades-destino").append(data);
+                            }
+                        });
+                    } else {
+                        $("#cidades-destino").empty();
+                        $("#cidades-destino").prepend("<option value='' selected >Selecione o Estado </option>");
+                    }
+
+            });
+            });
+    </script> 
+}

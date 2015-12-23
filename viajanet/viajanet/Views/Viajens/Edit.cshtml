@@ -1,0 +1,220 @@
+﻿@model viajanet.Models.Viajem
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edição</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Viajem</h4>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-horizontal">
+                @Html.HiddenFor(model => model.Id)
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @Html.LabelFor(model => model.FK_Estado_Saida, "Estado de Saída", htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-map"></i>
+                            </span>
+                            @Html.DropDownList("FK_Estado_Saida", null, htmlAttributes: new { @class = "form-control" ,@id = "estados-saida"})
+                            @Html.ValidationMessageFor(model => model.FK_Estado_Saida, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @Html.LabelFor(model => model.FK_Cidade_Saida, "Cidade de Saída", htmlAttributes: new { @class = "control-label" })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-map-marker"></i>
+                            </span>
+                            @Html.DropDownList("FK_Cidade_Saida", null, htmlAttributes: new { @class = "form-control", @id = "cidades-saida" })
+                            @Html.ValidationMessageFor(model => model.FK_Cidade_Saida, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @Html.LabelFor(model => model.Data_Ida,"Data de Ida", htmlAttributes: new { @class = "control-label" })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                            <input type="text" name="Data_Ida" value="@Model.Data_Ida" class="datepicker form-control"  placeholder="Data Ida" required/>
+                            @Html.ValidationMessageFor(model => model.Data_Ida, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @Html.LabelFor(model => model.Valor,"Valor", htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-money"></i>
+                            </span>
+                            @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @Html.LabelFor(model => model.FK_Estado_Destino, "Estado de destino", htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-map"></i>
+                            </span>
+                            @Html.DropDownList("FK_Estado_Destino", null, htmlAttributes: new { @class = "form-control", @id = "estados-destino" })
+                            @Html.ValidationMessageFor(model => model.FK_Estado_Destino, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @Html.LabelFor(model => model.FK_Cidade_Destino, "Cidade de destino", htmlAttributes: new { @class = "control-label" })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-map-marker"></i>
+                            </span>
+                            @Html.DropDownList("FK_Cidade_Destino", null, htmlAttributes: new { @class = "form-control", @id = "cidades-destino" })
+                            @Html.ValidationMessageFor(model => model.FK_Cidade_Destino, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @Html.LabelFor(model => model.Data_Volta, "Data de Volta",htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                           
+                            <input id="Data_Volta" type="text" name="Data_Volta" value="@Model.Data_Volta" class="datepicker form-control" placeholder="Data de Volta" required />
+                            @Html.ValidationMessageFor(model => model.Data_Volta, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        @Html.LabelFor(model => model.FK_Companhia, "Companhia", htmlAttributes: new { @class = "control-label " })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-plane"></i>
+                            </span>
+                            @Html.DropDownList("FK_Companhia", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.FK_Companhia, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="pull-right">
+         
+                    <input type="submit" value="Cadastar" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+        <!--Start datepicket request-->
+        <script src="~/Scripts/bootstrap-datepicker.js"></script>
+        <script src="~/Scripts/bootstrap-datepicker-globalize.js"></script>
+        <script src="~/Scripts/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+        <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+        <link href="~/Content/bootstrap-datepicker3.css" rel="stylesheet" />
+        <!--End DatePicket request -->
+    <script>
+        $(document).ready(function () {
+          
+                $('.datepicker').datepicker({
+                    format: "dd/mm/yyyy",
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    language: "pt-BR",
+                    orientation: "top auto",
+                    multidate: false,
+                    autoclose: true,
+                    todayHighlight: true
+                });
+
+
+                $("#estados-saida").change(function () {
+                    estAtual = $("#estados-saida").val();
+                    if (estAtual != "") {
+                        $("#cidades-saida").empty();
+
+                        $.ajax({
+                            type: "Post",
+                            url: "/Viajens/obterCidades/",
+                            data: { "id": estAtual },
+                            datatype: "Json",
+                            success: function (data) {
+                                $("#cidades-saida").append(data);
+                            }
+                        });
+                    } else {
+                        $("#cidades-saida").empty();
+                        $("#cidades-saida").prepend("<option value='' selected >Selecione o Estado </option>");
+                    }
+
+                });
+
+                $("#estados-destino").change(function () {
+
+                    estAtual = $("#estados-destino").val();
+                    if (estAtual != "") {
+                        $("#cidades-destino").empty();
+
+                        $.ajax({
+                            type: "Post",
+                            url: "/Viajens/obterCidades/",
+                            data: { "id": estAtual },
+                            datatype: "Json",
+                            success: function (data) {
+                                $("#cidades-destino").append(data);
+                            }
+                        });
+                    } else {
+                        $("#cidades-destino").empty();
+                        $("#cidades-destino").prepend("<option value='' selected >Selecione o Estado </option>");
+                    }
+
+            });
+            });
+</script> 
+}
+
+
+
+
+
+
+
+
+

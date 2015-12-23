@@ -16,7 +16,7 @@ namespace viajanet.Models
         }
 
         public int Id { get; set; }
-
+       
         public int FK_Estado_Saida { get; set; }
 
         public int FK_Cidade_Saida { get; set; }

@@ -1,0 +1,82 @@
+﻿@model viajanet.Models.Viajem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Viajem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cidade.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cidade.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cidade1.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cidade1.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Companhia.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Companhia.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado1.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado1.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_Ida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_Ida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_Volta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_Volta)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -73,7 +73,7 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Cep)
                                 </td>
-                                <td>
+                                <td style="white-space: nowrap;" class="center-block">
                                     <a href="@Url.Action("Quartos",new { idHotel = item.Id })" class="btn btn-success" title="Visualizar quartos" data-toggle="tooltip"><span><i class="fa fa-bed"></i></span></a>
 
                                     <a href="@Url.Action("Edit",new { id = item.Id })" class="btn btn-warning" title="Editar" data-toggle="tooltip"><span><i class="fa fa-pencil"></i></span></a>
