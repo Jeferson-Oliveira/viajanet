@@ -21,6 +21,7 @@ namespace viajanet.Models
 
         [Required]
         [StringLength(100)]
+        [Display(Name = "Cidade")]
         public string Nome { get; set; }
 
         public int FK_Estado { get; set; }

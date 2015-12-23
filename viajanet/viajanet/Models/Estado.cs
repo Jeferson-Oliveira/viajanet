@@ -22,6 +22,7 @@ namespace viajanet.Models
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Estado")]
         public string Nome { get; set; }
 
         [Required]
