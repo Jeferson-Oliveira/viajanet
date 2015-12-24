@@ -11,19 +11,23 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    <div class="row">
-        <div class="col-md-12">
-            <h4>Viajem</h4>
-            <hr />
+<div class="panel panel-default">
+    @using (Html.BeginForm())
+    {
+    <div class="panel-heading">
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Viajem</h4>
+                <hr />
+            </div>
         </div>
     </div>
+    <div class="panel-body">
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="form-horizontal">
-               
+
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     <div class="col-xs-12">
@@ -40,39 +44,39 @@
                 <div class="form-group">
                     <div class="col-xs-12">
                         @Html.LabelFor(model => model.FK_Cidade_Saida, "Cidade de Saída", htmlAttributes: new { @class = "control-label" })
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="fa fa-map-marker"></i>
-                        </span>
-                        <select id="cidades-saida" class="form-control" name="FK_Cidade_Saida" required>
-                            <option value="">Selecione o estado</option>
-                        </select>
-                        @Html.ValidationMessageFor(model => model.FK_Cidade_Saida, "", new { @class = "text-danger" })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-map-marker"></i>
+                            </span>
+                            <select id="cidades-saida" class="form-control" name="FK_Cidade_Saida" required>
+                                <option value="">Selecione o estado</option>
+                            </select>
+                            @Html.ValidationMessageFor(model => model.FK_Cidade_Saida, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        @Html.LabelFor(model => model.Data_Ida,"Data de ida", htmlAttributes: new { @class = "control-label" })
+                        @Html.LabelFor(model => model.Data_Ida, "Data de ida", htmlAttributes: new { @class = "control-label" })
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </span>
-                           <input id="Data_Ida" type="text" name="Data_Ida" class="datepicker form-control" placeholder="Data de Ida"  required/>
+                            <input id="Data_Ida" type="text" name="Data_Ida" class="datepicker form-control" placeholder="Data de Ida" required />
                             @Html.ValidationMessageFor(model => model.Data_Ida, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        @Html.LabelFor(model => model.Valor,"Valor", htmlAttributes: new { @class = "control-label" })
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="fa fa-money"></i>
-                        </span>
-                        @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" , @placeholder = "Valor"} })
-                        @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
-                    </div>
+                        @Html.LabelFor(model => model.Valor, "Valor", htmlAttributes: new { @class = "control-label" })
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-money"></i>
+                            </span>
+                            @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control", @placeholder = "Valor" } })
+                            @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,7 +85,7 @@
             <div class="form-horizontal">
                 <div class="form-group">
                     <div class="col-xs-12">
-                       <label for="estados-destino" class="control-label">Estado de Destino</label>
+                        <label for="estados-destino" class="control-label">Estado de Destino</label>
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-map"></i>
@@ -107,7 +111,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        @Html.LabelFor(model => model.Data_Volta, "Data de volta",htmlAttributes: new { @class = "control-label" })
+                        @Html.LabelFor(model => model.Data_Volta, "Data de volta", htmlAttributes: new { @class = "control-label" })
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
@@ -119,7 +123,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        @Html.LabelFor(model => model.FK_Companhia,"Companhia",htmlAttributes: new { @class = "control-label" })
+                        @Html.LabelFor(model => model.FK_Companhia, "Companhia", htmlAttributes: new { @class = "control-label" })
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-plane"></i>
@@ -132,22 +136,26 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <div class="pull-right">
-                    <input id="reset" type="reset" value="Apagar campos" class="btn btn-danger" />
-                    <input type="submit" value="Cadastar" class="btn btn-success" />
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="pull-right">
+                        <input id="reset" type="reset" value="Apagar campos" class="btn btn-danger" />
+                        <input type="submit" value="Cadastar" class="btn btn-success" />
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-}
+    }
+</div>
 
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
-    
+   
     <!--Start datepicket request-->
     <script src="~/Scripts/bootstrap-datepicker.js"></script>
     <script src="~/Scripts/bootstrap-datepicker-globalize.js"></script>

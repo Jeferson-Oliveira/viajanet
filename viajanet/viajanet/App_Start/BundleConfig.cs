@@ -39,7 +39,8 @@ namespace viajanet
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                        "~/Scripts/jquery.validate*",
+                        "~/Scripts/currency.js")); // fix to values with comma
 
             // bootstrap js files
 

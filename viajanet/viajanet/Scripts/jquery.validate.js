@@ -1115,8 +1115,9 @@ $.extend($.validator, {
 		},
 
 		// http://docs.jquery.com/Plugins/Validation/Methods/range
-		range: function( value, element, param ) {
-			return this.optional(element) || ( value >= param[0] && value <= param[1] );
+		range: function (value, element, param) {
+		    
+			return this.optional(element) || ( value >= param[0] && value <= param[1] ); modificado
 		},
 
 		// http://docs.jquery.com/Plugins/Validation/Methods/equalTo

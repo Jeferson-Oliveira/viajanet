@@ -48,6 +48,7 @@
                                 <i class="glyphicon glyphicon-phone"></i>
                             </span>
                             @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefone" } })
+                            <input type="tel" id="mobile-number" name="Telefone" class="form-control">
                             @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -151,8 +152,22 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <!-- Start Tel input mask request-->
+    <link rel="stylesheet" href="~/Content/assets/plugins/inputTelMask/build/css/intlTelInput.css">
+    
+    <script src="~/Content/assets/plugins/inputTelMask/build/js/intlTelInput.min.js"></script>
+
+
+    <!-- end Tel input mask request-->
     <script>
         $(document).ready(function () {
+            $("#mobile-number").intlTelInput({
+                initialCountry: "br",
+                utilsScript: "../../lib/libphonenumber/build/utils.js" // just for formatting/placeholders etc
+            });
+
+
             $("#estados").prepend("<option value='' selected >Selecione o Estado </option>");
             $("#estados").change(function () {
 

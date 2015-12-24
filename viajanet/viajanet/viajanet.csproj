@@ -173,10 +173,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\QuartosController.cs" />
     <Compile Include="Controllers\ViajensController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cidade.cs" />
     <Compile Include="Models\Companhia.cs" />
@@ -1439,6 +1441,11 @@
     <Content Include="Content\assets\plugins\iCheck\skins\square\yellow.css" />
     <Content Include="Content\assets\plugins\iCheck\skins\square\yellow.png" />
     <Content Include="Content\assets\plugins\iCheck\skins\square\_all.css" />
+    <Content Include="Content\assets\plugins\inputTelMask\build\css\demo.css" />
+    <Content Include="Content\assets\plugins\inputTelMask\build\css\intlTelInput.css" />
+    <Content Include="Content\assets\plugins\inputTelMask\build\img\flags.png" />
+    <Content Include="Content\assets\plugins\inputTelMask\build\js\intlTelInput.js" />
+    <Content Include="Content\assets\plugins\inputTelMask\build\js\intlTelInput.min.js" />
     <Content Include="Content\assets\plugins\Ion.RangeSlider\css\ion.rangeSlider.css" />
     <Content Include="Content\assets\plugins\Ion.RangeSlider\css\ion.rangeSlider.skinFlat.css" />
     <Content Include="Content\assets\plugins\Ion.RangeSlider\css\ion.rangeSlider.skinNice.css" />
@@ -2225,6 +2232,7 @@
     <Content Include="Content\assets\plugins\switchery\README.md" />
     <Content Include="Content\assets\plugins\wijets\.DS_Store" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\currency.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -2345,6 +2353,13 @@
     <Content Include="Views\Viajens\Details.cshtml" />
     <Content Include="Views\Viajens\Edit.cshtml" />
     <Content Include="Views\Viajens\Index.cshtml" />
+    <Content Include="Views\Quartos\Create.cshtml" />
+    <Content Include="Views\Quartos\Delete.cshtml" />
+    <Content Include="Views\Quartos\Details.cshtml" />
+    <Content Include="Views\Quartos\Edit.cshtml" />
+    <Content Include="Views\Quartos\Index.cshtml" />
+    <Content Include="Views\Quartos\viewQuartosHotel.cshtml" />
+    <Content Include="Views\Quartos\CreateQuartoHotel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

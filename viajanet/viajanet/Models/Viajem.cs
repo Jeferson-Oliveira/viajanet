@@ -25,6 +25,7 @@ namespace viajanet.Models
 
         public int FK_Cidade_Destino { get; set; }
 
+        [DataType(DataType.Currency)]
         public double Valor { get; set; }
 
         [Column(TypeName = "date")]

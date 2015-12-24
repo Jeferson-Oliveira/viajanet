@@ -119,7 +119,7 @@ namespace viajanet.Models
                 .HasMany(e => e.Quarto)
                 .WithRequired(e => e.Hotel)
                 .HasForeignKey(e => e.Fk_Hotel)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true); // modificado para apagar os quartos do hotel deletado
 
             modelBuilder.Entity<Quarto>()
                 .Property(e => e.Descricao)
