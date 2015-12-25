@@ -9,7 +9,6 @@ using System.Web;
 using System.Web.Mvc;
 using viajanet.Models;
 using System.Text;
-
 namespace viajanet.Controllers
 {
     public class ViajensController : Controller
@@ -70,7 +69,20 @@ namespace viajanet.Controllers
             ViewBag.FK_Estado_Destino = new SelectList(db.Estado, "Id", "Nome", viajem.FK_Estado_Destino);
             return View(viajem);
         }
+       
+        public ActionResult obterEstados()
+        {
+            var estados = db.Estado.ToList();
+            StringBuilder options = new StringBuilder();
+            options.Append("<option value=''> Selecione um estado </option>");
+            foreach (var estado in estados)
+            {
+                options.Append("<option value='" + estado.Id + "'>" + estado.Nome + "</option>");
+            }
+            return Content(options.ToString());
+        }
 
+        [HttpPost]
         public ActionResult obterCidades()
         {
             int idEstado = Convert.ToInt32(Request["id"]);
@@ -150,6 +162,19 @@ namespace viajanet.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+        //Get
+        public ActionResult procurarViajens() {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult resultViajens() {
+            var Csaida = Convert.ToInt32(Request["CidadeSaida"]); // eu só preciso das Id's da cidade pra fazer a pesquisa
+            var Cdestino = Convert.ToInt32(Request["CidadeDestino"]);
+            var viajens = db.Viajem.Include(v => v.Cidade).Include(v => v.Cidade1).Include(v => v.Companhia).Include(v => v.Estado).Include(v => v.Estado1).Where(v => v.FK_Cidade_Saida == Csaida).Where(v => v.FK_Cidade_Destino == Cdestino);
+            
+            return View(viajens.ToList());
+        } 
 
         protected override void Dispose(bool disposing)
         {

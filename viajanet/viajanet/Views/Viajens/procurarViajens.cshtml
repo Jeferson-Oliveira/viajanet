@@ -1,0 +1,164 @@
+﻿@model IEnumerable<dynamic>
+@{
+    ViewBag.Title = "procurarViajens";
+
+}
+
+<h2>procurarViajens</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("resultViajens", "Viajens", FormMethod.Post))
+            {
+            <div class="panel">
+                <div class="panel-heading">
+                    @Html.AntiForgeryToken()
+                    <p>Para onde você quer ir?</p>
+                </div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <legend>Saída</legend>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <label for="estados-saida">Estado </label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-map-marker"></i>
+                                                </span>
+                                                <select id="estados-saida" name="EstadoSaida" class="form-control"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <label for="cidades-saida">Cidade </label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-map-marker"></i>
+                                                </span>
+                                                <select id="cidades-saida" name="CidadeSaida" class="form-control"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <legend>Destino</legend>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <label for="estados-destino">Estado </label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-map-marker"></i>
+                                                </span>
+                                                <select id="estados-destino" name="EstadoDestino" class="form-control"></select>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <label for="cidades-destino">Cidade </label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-map-marker"></i>
+                                                </span>
+                                                <select id="cidades-destino" name="CidadeDestino" class="form-control"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info pull-right"><span>Procurar <i class="glyphicon glyphicon-search"></i></span></button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+            $(document).ready(function () {
+                $('.selectpicker').selectpicker();
+                estAtual = $("#estados-saida").val(); // como será feito assim que a p´gaina carregar os valores serão os mesmos para ambos os combos, então basta eu pegar o valor de 1
+
+                $("#cidades-saida,#cidades-destino").empty();
+
+                $.ajax({
+                    type: "Post",
+                    url: "/Viajens/obterEstados/",
+                    success: function (data) {
+                        $("#estados-saida,#estados-destino").append(data);
+                        $("#cidades-saida,#cidades-destino").empty();
+                        $("#cidades-saida,#cidades-destino").prepend("<option value='' selected>Selecione o Estado </option>");
+                    }
+                });
+
+            })
+            $(document).ready(function () {
+
+
+
+
+                $("#estados-saida").change(function () {
+                    estAtual = $("#estados-saida").val();
+                    if (estAtual != "") {
+                        $("#cidades-saida").empty();
+
+                        $.ajax({
+                            type: "Post",
+                            url: "/Viajens/obterCidades/",
+                            data: { "id": estAtual },
+                            datatype: "Json",
+                            success: function (data) {
+                                $("#cidades-saida").append(data);
+                            }
+                        });
+                    } else {
+                        $("#cidades-saida").empty();
+                        $("#cidades-saida").prepend("<option value='' selected >Selecione o Estado </option>");
+                    }
+
+                });
+
+                $("#estados-destino").change(function () {
+
+                    estAtual = $("#estados-destino").val();
+                    if (estAtual != "") {
+                        $("#cidades-destino").empty();
+
+                        $.ajax({
+                            type: "Post",
+                            url: "/Viajens/obterCidades/",
+                            data: { "id": estAtual },
+                            datatype: "Json",
+                            success: function (data) {
+                                $("#cidades-destino").append(data);
+                            }
+                        });
+                    } else {
+                        $("#cidades-destino").empty();
+                        $("#cidades-destino").prepend("<option value='' selected >Selecione o Estado </option>");
+                    }
+
+                });
+
+            });
+
+
+    </script>
+}

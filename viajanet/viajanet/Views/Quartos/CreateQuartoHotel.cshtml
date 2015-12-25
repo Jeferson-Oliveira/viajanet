@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -72,9 +72,11 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    
+
     <script type="text/javascript">
         $(document).ready(function () {
+            
+
             $('.money').mask('000000000000000,00', { reverse: true });
             $('.money2').mask("#.##0,00", { reverse: true });
         });
