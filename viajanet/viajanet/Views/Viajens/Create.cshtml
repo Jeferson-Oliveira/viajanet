@@ -62,7 +62,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </span>
-                            <input id="Data_Ida" type="text" name="Data_Ida" class="datepicker form-control" placeholder="Data de Ida" required />
+                            <div class="event_period"><input id="Data_Ida" type="text" name="Data_Ida" class="datepicker form-control actual_range" placeholder="Data de Ida" required /></div>
                             @Html.ValidationMessageFor(model => model.Data_Ida, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </span>
-                            <input id="Data_Volta" type="text" name="Data_Volta" class="datepicker form-control" placeholder="Data de Volta" required />
+                            <div class="event_period"><input id="Data_Volta" type="text" name="Data_Volta" class="actual_range datepicker form-control" placeholder="Data de Volta" required /></div>
                             @Html.ValidationMessageFor(model => model.Data_Volta, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -166,21 +166,24 @@
     
     <script>
         $(document).ready(function () {
+
+            $('.event_period').datepicker({
+                inputs: $('.actual_range'),
+                format: "dd/mm/yyyy",
+                todayBtn: "linked",
+                clearBtn: true,
+                language: "pt-BR",
+                orientation: "top auto",
+                multidate: false,
+                autoclose: true,
+                todayHighlight: true
+            });
             $('.money').mask('000000000000000,00', { reverse: true });
             $("#reset").click(function () {
                 $("#cidades-destino , #cidades-saida").empty();
                 $("#cidades-destino , #cidades-saida").prepend("<option value='' selected >Selecione o Estado </option>");
             });
-                $('.datepicker').datepicker({
-                    format: "dd/mm/yyyy",
-                    todayBtn: "linked",
-                    clearBtn: true,
-                    language: "pt-BR",
-                    orientation: "top auto",
-                    multidate: false,
-                    autoclose: true,
-                    todayHighlight: true
-                });
+          
 
                 $("#estados-saida , #estados-destino").prepend("<option value='' selected >Selecione o Estado </option>");
 
