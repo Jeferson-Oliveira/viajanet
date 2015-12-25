@@ -74,7 +74,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-money"></i>
                             </span>
-                            @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control", @placeholder = "Valor" } })
+                            @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control money", @placeholder = "Valor" } })
                             @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -155,7 +155,7 @@
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
-   
+
     <!--Start datepicket request-->
     <script src="~/Scripts/bootstrap-datepicker.js"></script>
     <script src="~/Scripts/bootstrap-datepicker-globalize.js"></script>
@@ -166,6 +166,7 @@
     
     <script>
         $(document).ready(function () {
+            $('.money').mask('000000000000000,00', { reverse: true });
             $("#reset").click(function () {
                 $("#cidades-destino , #cidades-saida").empty();
                 $("#cidades-destino , #cidades-saida").prepend("<option value='' selected >Selecione o Estado </option>");

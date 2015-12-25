@@ -29,7 +29,7 @@
             @Html.LabelFor(model => model.Telefone, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger phone" })
             </div>
         </div>
 
@@ -68,7 +68,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Cep, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Cep, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Cep, new { htmlAttributes = new { @class = "form-control cep" } })
                 @Html.ValidationMessageFor(model => model.Cep, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -95,4 +95,46 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            // init masks
+            var maskBehavior = function (val) {
+                return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+            },
+            options = {
+                onKeyPress: function (val, e, field, options) {
+                    field.mask(maskBehavior.apply({}, arguments), options);
+                }
+            };
+
+            $('.phone').mask(maskBehavior, options);
+            $('.cep').mask('00000-000');
+
+            // end masks
+            
+            $("#estados").change(function () {
+
+                estAtual = $("#estados").val();
+                if (estAtual != "") {
+                    $("#cidades").empty();
+
+                    $.ajax({
+                        type: "Post",
+                        url: "/Hotels/obterCidades/",
+                        data: { "id": estAtual },
+                        datatype: "Json",
+                        success: function (data) {
+                            $("#cidades").append(data);
+                        }
+                    });
+                } else {
+                    $("#cidades").empty();
+                    $("#cidades").prepend("<option value='' selected >Selecione o Estado </option>");
+                }
+
+        });
+    });
+</script> 
+    
+
 }

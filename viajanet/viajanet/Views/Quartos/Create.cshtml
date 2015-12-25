@@ -34,7 +34,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Diaria, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Diaria, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Diaria, new { htmlAttributes = new { @class = "form-control money" } })
                 @Html.ValidationMessageFor(model => model.Diaria, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -74,6 +74,7 @@
 
         <script>
             $(document).ready(function () {
+                $('.money').mask('000000000000000,00', { reverse: true });
                 $("#dropHoteis").prepend("<option value='' selected >Selecione um Hotel </option>");
             });
         </script>

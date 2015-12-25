@@ -63,7 +63,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-money"></i>
                             </span>
-                            @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control money" } })
                             @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -151,7 +151,7 @@
         <!--End DatePicket request -->
     <script>
         $(document).ready(function () {
-          
+            $('.money').mask('000000000000000,00', { reverse: true });
                 $('.datepicker').datepicker({
                     format: "dd/mm/yyyy",
                     todayBtn: "linked",

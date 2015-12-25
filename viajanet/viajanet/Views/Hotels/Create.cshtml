@@ -47,8 +47,8 @@
                             <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-phone"></i>
                             </span>
-                            @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Telefone" } })
-                            <input type="tel" id="mobile-number" name="Telefone" class="form-control">
+                            @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control phone", @placeholder = "Telefone" } })
+                           
                             @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-map-marker"></i>
                         </span>
-                        @Html.EditorFor(model => model.Cep, new { htmlAttributes = new { @class = "form-control", @placeholder = "CEP" } })
+                        @Html.EditorFor(model => model.Cep, new { htmlAttributes = new { @class = "form-control cep", @placeholder = "CEP" } })
                         @Html.ValidationMessageFor(model => model.Cep, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -152,22 +152,24 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
-    <!-- Start Tel input mask request-->
-    <link rel="stylesheet" href="~/Content/assets/plugins/inputTelMask/build/css/intlTelInput.css">
     
-    <script src="~/Content/assets/plugins/inputTelMask/build/js/intlTelInput.min.js"></script>
-
-
-    <!-- end Tel input mask request-->
+    
     <script>
         $(document).ready(function () {
-            $("#mobile-number").intlTelInput({
-                initialCountry: "br",
-                utilsScript: "../../lib/libphonenumber/build/utils.js" // just for formatting/placeholders etc
-            });
+            // init masks
+            var maskBehavior = function (val) {
+                return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+            },
+            options = {
+                onKeyPress: function (val, e, field, options) {
+                    field.mask(maskBehavior.apply({}, arguments), options);
+                }
+            };
 
+            $('.phone').mask(maskBehavior, options);
+            $('.cep').mask('00000-000');
 
+            // end masks
             $("#estados").prepend("<option value='' selected >Selecione o Estado </option>");
             $("#estados").change(function () {
 

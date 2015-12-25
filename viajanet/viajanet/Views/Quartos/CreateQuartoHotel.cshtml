@@ -4,7 +4,7 @@
     ViewBag.Title = "CreateQuartoHotel";
 }
 
-<h2>CreateQuartoHotel  -  @ViewBag.Nome_Hotel</h2>
+<h2>CreateQuartoHotel  -  @TempData.Peek("Nome_Hotel")</h2>
 
 
 @using (Html.BeginForm()) 
@@ -18,8 +18,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Fk_Hotel, "Hotel", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="hidden" name="Fk_Hotel" value="@ViewBag.FK_Hotel" />
-                <input type="text" name="" value="@ViewBag.Nome_Hotel" readonly class="form-control" />
+                <input type="hidden" name="Fk_Hotel" value="@TempData.Peek("FK_Hotel")" />
+                <input type="text" name="" value="@TempData.Peek("Nome_Hotel")" readonly class="form-control" />
                 @Html.ValidationMessageFor(model => model.Fk_Hotel, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Diaria, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Diaria, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Diaria, new { htmlAttributes = new { @class = "form-control money" } })
                 @Html.ValidationMessageFor(model => model.Diaria, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -72,4 +72,11 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.money').mask('000000000000000,00', { reverse: true });
+            $('.money2').mask("#.##0,00", { reverse: true });
+        });
+    </script>
 }

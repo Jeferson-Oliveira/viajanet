@@ -171,8 +171,9 @@ namespace viajanet.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            ViewBag.Fk_Hotel = Convert.ToInt32(id);
-            ViewBag.Nome_Hotel = db.Hotel.Where(h => h.Id == id).Select(h => h.Nome).ToString();
+            TempData["Fk_Hotel"] = Convert.ToInt32(id);
+            var nome = db.Hotel.Where(h => h.Id == id).Select(h => h.Nome).FirstOrDefault();
+            TempData["Nome_Hotel"] = nome;
 
             return View();
         }
