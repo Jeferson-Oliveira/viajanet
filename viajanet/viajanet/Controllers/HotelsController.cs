@@ -56,11 +56,13 @@ namespace viajanet.Controllers
 
             if (img != null)
             {
+        
                 System.IO.Directory.CreateDirectory(HttpContext.Server.MapPath("~/Imagens/Hoteis/") + hotel.Nome + "/" + hotel.Cep);
                 img.SaveAs(HttpContext.Server.MapPath("~/Imagens/Hoteis/" + hotel.Nome + "/" + hotel.Cep + "/") + img.FileName);
 
 
-                hotel.Img = hotel.Nome + "/" + hotel.Cep + "/" + img.FileName;
+                hotel.Img = "/Imagens/Hoteis/" + hotel.Nome + "/" + hotel.Cep + "/" + img.FileName;
+                //hotel.Img = hotel.Nome + "/" + hotel.Cep + "/" +  img.FileName;
             }
             if (ModelState.IsValid)
             {
@@ -118,8 +120,8 @@ namespace viajanet.Controllers
                 System.IO.Directory.CreateDirectory(HttpContext.Server.MapPath("~/Imagens/Hoteis/") + hotel.Nome + "/" + hotel.Cep);
                 img.SaveAs(HttpContext.Server.MapPath("~/Imagens/Hoteis/" + hotel.Nome + "/" + hotel.Cep + "/") + img.FileName);
 
-
-                hotel.Img = hotel.Nome + "/" + hotel.Cep + "/" +  img.FileName;
+                hotel.Img = "/Imagens/Hoteis/" + hotel.Nome + "/" + hotel.Cep + "/" + img.FileName;
+                //hotel.Img = hotel.Nome + "/" + hotel.Cep + "/" +  img.FileName;
             }
             if (ModelState.IsValid)
             {

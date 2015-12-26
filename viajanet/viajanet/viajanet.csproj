@@ -1992,6 +1992,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Imagens\Hoteis\Hotel Aliança\4511000\Desert.jpg" />
+    <Content Include="Imagens\Hoteis\Hotel das flores\41100-725\Desert.jpg" />
+    <Content Include="Imagens\Hoteis\Hotel das flores\47885555\b89eff70-398d-4b1b-8806-02458a185c5a_5.jpg" />
+    <Content Include="Imagens\Hoteis\Hotel mAscara\41200-558\27218b6e-c605-499a-a54c-e15ded4ebe55_8.jpg" />
+    <Content Include="Imagens\Hoteis\Hptel aliznça\41100-725\frases-capa-para-facebook-frases-6.jpg" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap-select.js" />
