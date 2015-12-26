@@ -1,20 +1,19 @@
-﻿@model viajanet.Models.Compra
+﻿@using Microsoft.AspNet.Identity
+@model viajanet.Models.Compra
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Compra";
 }
 
-<h2>Create</h2>
+<h2>Confirmação de compra</h2>
 
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
+<form action="@Url.Action("confirmCompra","Compras")" method="post" oninput="calc_total();">
 
-
+   
     <div class="panel panel-info">
         <div class="panel-heading">
-            @Html.AntiForgeryToken()
+          
         </div>
         <div class="panel-body">
             <div class="form-horizontal">
@@ -70,7 +69,7 @@
                                 </label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <i class="fa fa-money"></i>
+                                        <i class="fa fa-mon"></i>
                                     </span>
                                     <input id="valorTotal" type="text" name="Valor_Total" readonly required class="form-control" value="@ViewBag.Viajem.Valor" />
                                 </div>
@@ -163,7 +162,7 @@
                 </div>
 
                 <hr />
-
+                
 
                 @if (ViewBag.Hotel != null) // esta parte só será exibida se o usuário selecionou um hotel
                 {
@@ -248,30 +247,48 @@
                             @if (!string.IsNullOrEmpty(ViewBag.Hotel.Img)) // se tiver imgem ela será exibida
                             {
                                 <figure>
-
+                                   
                                     <img alt="Imagem do hotel" class="img-thumbnail" src="@ViewBag.Hotel.Img" />
                                 </figure>
-
-                            }
+                                
+                            } 
                         </div>
                     </div>
                     <!--End Hotel-->
 
                 }
 
+                </div>
+            </div>
+            <div class="panel-footer">
+
             </div>
         </div>
-        <div class="panel-footer">
-
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success">Comprar</button>
+            </div>
         </div>
-    </div>
 
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    </form>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+  
+<script>
+     function calc_total(){
+         var criancas = parseInt(document.getElementById("qtdCr").value);
+         var adultos = parseInt(document.getElementById("qtdAd").value);
+         var valorViagem = parseFloat(document.getElementById("valorViajem").value);
+         var valorTotal = (criancas + adultos) * valorViagem;
+
+         document.getElementById("valorTotal").value = valorTotal;
+
+     }
+</script>
+<script type="text/javascript" src="~/Content/assets/plugins/card/lib/js/card.js"></script>  					
+
+<link type="text/css" href="~/Content/assets/plugins/card/lib/css/card.css" rel="stylesheet">
+<!-- Card -->
+
 }

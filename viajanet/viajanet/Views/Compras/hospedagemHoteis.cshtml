@@ -1,0 +1,85 @@
+﻿@model IEnumerable<viajanet.Models.Hotel>
+
+@{
+    ViewBag.Title = "Hoteis";
+}
+
+<h2>Selecione o Hotel para hospedagem (Se disponível)</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2>Hoteis</h2>
+                <div class="panel-ctrls">
+                </div>
+            </div>
+            <div class="panel-body panel-no-padding">
+                <table id="example" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Nome)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Telefone)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Longradouro)
+                            </th>
+                     
+                            <th>
+                                @Html.DisplayNameFor(model => model.Cidade.Nome)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Bairro)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Cep)
+                            </th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nome)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Telefone)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Longradouro)
+                                </td>
+                           
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cidade.Nome)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Bairro)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cep)
+                                </td>
+                                <td style="white-space: nowrap;" class="center-block">
+                                    <!-- caso o cliente deseje ir pra-->
+                                    <a href="@Url.Action("confirmHospedagem","Compras",new { hotel = item.Id , viagem = @TempData.Peek("idViagem") })" class="btn btn-success" title="Reservar" data-toggle="tooltip"><span>Resevar hospedagem <i class="fa fa-bed"></i></span></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="panel-footer"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <a href="@Url.Action("confirmHospedagem","Compras", new {viagem = TempData.Peek("idViagem") })" class="btn btn-info pull-right"><span>Não desejo hospedagem / Não há Hoteis disponíveis</span></a>
+    </div>
+</div>
