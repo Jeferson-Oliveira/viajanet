@@ -78,7 +78,7 @@
                                     @Html.DisplayFor(modelItem => item.Valor)
                                 </td>
                                 <td style="white-space: nowrap;">
-                                    <a href="@Url.Action("Comprar","Compras",new { id = item.Id })" class="btn btn-success" title="Comprar" data-toggle="tooltip"><span>Comprar <i class="fa fa-shopping-bag"></i></span></a>
+                                    <a href="@Url.Action("hospedagemHoteis", "Compras",new { viagem = item.Id , cidade = item.FK_Cidade_Destino})" class="btn btn-success" title="Comprar" data-toggle="tooltip"><span>Comprar <i class="fa fa-shopping-bag"></i></span></a>
                                     <a href="@Url.Action("Details",new { id = item.Id })" class="btn btn-info" title="Detalhes da viagem" data-toggle="tooltip"><span>Detalhes <i class="fa fa-list"></i></span></a>
                                 </td>
                             </tr>

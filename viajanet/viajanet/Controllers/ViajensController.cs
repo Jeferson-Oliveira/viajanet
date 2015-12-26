@@ -168,9 +168,10 @@ namespace viajanet.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult resultViajens() {
-            var Csaida = Convert.ToInt32(Request["CidadeSaida"]); // eu só preciso das Id's da cidade pra fazer a pesquisa
-            var Cdestino = Convert.ToInt32(Request["CidadeDestino"]);
+        public ActionResult resultViajens(FormCollection result) {
+
+            var Csaida = Convert.ToInt32(result["CidadeSaida"]); // eu só preciso das Id's da cidade pra fazer a pesquisa
+            var Cdestino = Convert.ToInt32(result["CidadeDestino"]);
             var viajens = db.Viajem.Include(v => v.Cidade).Include(v => v.Cidade1).Include(v => v.Companhia).Include(v => v.Estado).Include(v => v.Estado1).Where(v => v.FK_Cidade_Saida == Csaida).Where(v => v.FK_Cidade_Destino == Cdestino);
             
             return View(viajens.ToList());

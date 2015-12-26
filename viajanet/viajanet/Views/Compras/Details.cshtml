@@ -1,0 +1,66 @@
+﻿@model viajanet.Models.Compra
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Compra</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Hotel.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hotel.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Viajem.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Viajem.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fk_Usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fk_Usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qtd_Adultos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qtd_Adultos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qtd_Criancas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qtd_Criancas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor_Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor_Total)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,72 @@
+﻿@model viajanet.Models.Compra
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Compra</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Hotel.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hotel.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Viajem.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Viajem.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fk_Usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fk_Usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qtd_Adultos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qtd_Adultos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qtd_Criancas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Qtd_Criancas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor_Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor_Total)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
