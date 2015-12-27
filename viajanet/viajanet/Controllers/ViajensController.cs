@@ -157,10 +157,22 @@ namespace viajanet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Viajem viajem = await db.Viajem.FindAsync(id);
-            db.Viajem.Remove(viajem);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try {
+                Viajem viajem = await db.Viajem.FindAsync(id);
+                db.Viajem.Remove(viajem);
+                await db.SaveChangesAsync();
+
+                TempData["Mensagem"] = "Viajem deletada";
+                TempData["tipo"] = "success";
+               
+                return RedirectToAction("Index");
+            }catch(Exception e)
+            {
+                TempData["Mensagem"] = "Ocorreu um erro ao deletar esta viajem , provavelmente ele está associado a alguma compra, caso não seja, contate o administrador e informe o seguinte erro:";
+                TempData["tipo"] = "error";
+                TempData["Erro"] = e.GetType().Name;
+                return RedirectToAction("Index");
+            }
         }
 
         //Get

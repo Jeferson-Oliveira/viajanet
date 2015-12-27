@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using viajanet.Models;
 using System.Text;
+using System.IO;
 
 namespace viajanet.Controllers
 {
@@ -54,22 +55,42 @@ namespace viajanet.Controllers
         public async Task<ActionResult> Create([Bind(Include = "Id,Nome,Telefone,Longradouro,FK_Estado,FK_Cidade,Bairro,Cep,Img")] Hotel hotel,HttpPostedFileBase img)
         {
 
-            if (img != null)
+            try
             {
-        
-                System.IO.Directory.CreateDirectory(HttpContext.Server.MapPath("~/Imagens/Hoteis/") + hotel.Nome + "/" + hotel.Cep);
-                img.SaveAs(HttpContext.Server.MapPath("~/Imagens/Hoteis/" + hotel.Nome + "/" + hotel.Cep + "/") + img.FileName);
+                if (ModelState.IsValid)
+                {
+                    if (img != null)
+                    {
+                        FileInfo imgInfo = new FileInfo(img.FileName);
 
+                        if (imgInfo.Extension.Equals(".jpg", StringComparison.InvariantCultureIgnoreCase) || imgInfo.Extension.Equals(".png", StringComparison.InvariantCultureIgnoreCase) || imgInfo.Extension.Equals(".gif", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            string imgNome = Guid.NewGuid().ToString("N") + imgInfo.Extension.ToLower();
+                            img.SaveAs(Server.MapPath("~/Imagens/Hoteis/" + imgNome));
+                            hotel.Img = imgNome;
+                        }
 
-                hotel.Img = "/Imagens/Hoteis/" + hotel.Nome + "/" + hotel.Cep + "/" + img.FileName;
-                //hotel.Img = hotel.Nome + "/" + hotel.Cep + "/" +  img.FileName;
+                        //System.IO.Directory.CreateDirectory(HttpContext.Server.MapPath("~/Imagens/Hoteis/") + hotel.Nome + "/" + hotel.Cep);
+                        //img.SaveAs(HttpContext.Server.MapPath("~/Imagens/Hoteis/" + hotel.Nome + "/" + hotel.Cep + "/") + img.FileName);
+                        //hotel.Img = "/Imagens/Hoteis/" + hotel.Nome + "/" + hotel.Cep + "/" + img.FileName;
+                        //hotel.Img = hotel.Nome + "/" + hotel.Cep + "/" +  img.FileName;
+                    }
+
+                    db.Hotel.Add(hotel);
+                    await db.SaveChangesAsync();
+                    TempData["Mensagem"] = "Hotel Cadastrado com sucesso";
+                    TempData["tipo"] = "success";
+                    return RedirectToAction("Index");
+                }
             }
-            if (ModelState.IsValid)
+            catch(Exception e)
             {
-                db.Hotel.Add(hotel);
-                await db.SaveChangesAsync();
+                TempData["Mensagem"] = "Ocorreu um erro ao cadastrar este hotel , erro:";
+                TempData["tipo"] = "error";
+                TempData["Erro"] = e.GetType().Name;
                 return RedirectToAction("Index");
             }
+            
 
             ViewBag.FK_Cidade = new SelectList(db.Cidade, "Id", "Nome", hotel.FK_Cidade);
             ViewBag.FK_Estado = new SelectList(db.Estado, "Id", "Nome", hotel.FK_Estado);
@@ -115,18 +136,49 @@ namespace viajanet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Nome,Telefone,Longradouro,FK_Estado,FK_Cidade,Bairro,Cep,Img")] Hotel hotel, HttpPostedFileBase img)
         {
-            if (img != null)
+            try
             {
-                System.IO.Directory.CreateDirectory(HttpContext.Server.MapPath("~/Imagens/Hoteis/") + hotel.Nome + "/" + hotel.Cep);
-                img.SaveAs(HttpContext.Server.MapPath("~/Imagens/Hoteis/" + hotel.Nome + "/" + hotel.Cep + "/") + img.FileName);
+                if (ModelState.IsValid)
+                {
+                    string nomeImagemAntiga = Request["imagemAntiga"];
+                    if (img != null) // se o usuário quis outra imagem
+                    {
 
-                hotel.Img = "/Imagens/Hoteis/" + hotel.Nome + "/" + hotel.Cep + "/" + img.FileName;
-                //hotel.Img = hotel.Nome + "/" + hotel.Cep + "/" +  img.FileName;
+                        FileInfo imgInfo = new FileInfo(img.FileName);
+
+                        if (imgInfo.Extension.Equals(".jpg", StringComparison.InvariantCultureIgnoreCase) || imgInfo.Extension.Equals(".png", StringComparison.InvariantCultureIgnoreCase) || imgInfo.Extension.Equals(".gif", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            string imgNome = "";
+                            if (nomeImagemAntiga != string.Empty) // pra saber se já existe uma imagem deste hotel
+                            {
+                                var caminhoImagem = Server.MapPath("~/Imagens/Hoteis/" + nomeImagemAntiga);
+                                System.IO.File.Delete(caminhoImagem);
+                            }
+                            imgNome = Guid.NewGuid().ToString("N") + imgInfo.Extension.ToLower();
+                            img.SaveAs(Server.MapPath("~/Imagens/Hoteis/" + imgNome));
+                            hotel.Img = imgNome;
+                        }
+                    }
+                    else // se a imagem for nula eu atribuo null ao meu objeto
+                    {
+
+                        hotel.Img = nomeImagemAntiga;
+
+                    }
+
+                    db.Entry(hotel).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    TempData["Mensagem"] = "Edições realizadas com succeso";
+                    TempData["tipo"] = "success";
+                    return RedirectToAction("Details", new { id = hotel.Id });
+
+                }
             }
-            if (ModelState.IsValid)
+            catch(Exception e)
             {
-                db.Entry(hotel).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                TempData["Mensagem"] = "Ocorreu um erro ao editar este hotel , erro:";
+                TempData["tipo"] = "error";
+                TempData["Erro"] = e.GetType().Name;
                 return RedirectToAction("Index");
             }
             ViewBag.FK_Cidade = new SelectList(db.Cidade, "Id", "Nome", hotel.FK_Cidade);
@@ -154,10 +206,26 @@ namespace viajanet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Hotel hotel = await db.Hotel.FindAsync(id);
-            db.Hotel.Remove(hotel);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try {
+                
+                Hotel hotel = await db.Hotel.FindAsync(id);
+                if (hotel.Img != string.Empty) // pra saber se já existe uma imagem deste hotel
+                {
+                    var caminhoImagem = Server.MapPath("~/Imagens/Hoteis/" + hotel.Img);
+                    System.IO.File.Delete(caminhoImagem);
+                }
+                db.Hotel.Remove(hotel);
+                await db.SaveChangesAsync();
+                TempData["Mensagem"] = "Hotel Deletado com sucesso";
+                TempData["tipo"] = "success";
+                return RedirectToAction("Index");
+            }catch(Exception e)
+            {
+                TempData["Mensagem"] = "Ocorreu um erro ao deletar este hotel , provavelmente ele está associado a alguma compra.";
+                TempData["tipo"] = "error";
+                TempData["Erro"] = e.GetType().Name;
+                return RedirectToAction("Index");
+            }
         }
 
         protected override void Dispose(bool disposing)

@@ -1,82 +1,111 @@
 ﻿@model viajanet.Models.Hotel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes";
 }
+@if (TempData["Mensagem"] != null)
+{
+    if (TempData["tipo"].ToString() == "success")
+    {
 
-<h2>Details</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Sucesso</strong> @TempData["Mensagem"];
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Erro</strong> @TempData["Mensagem"] , @TempData["Erro"];
+                </div>
+            </div>
+        </div>
+    }
+}
+<h2>Detalhes</h2>
 
-<div>
-    <h4>Hotel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Cidade.Nome)
-        </dt>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="text-center">@Html.DisplayFor(model => model.Nome)</h4>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Estado.Nome)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Estado.Nome)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Cidade.Nome)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cidade.Nome)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Cidade.Nome)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Telefone)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Estado.Nome)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Telefone)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Estado.Nome)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Longradouro)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Longradouro)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Bairro)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Telefone)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Bairro)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Telefone)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Cep)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Longradouro)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Cep)
+                    </dd>
+                </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.Longradouro)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Bairro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Bairro)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cep)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cep)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Img)
-        </dt>
-
-        <dd>
-            <img src="@Model.Img" class="img-thumbnail" />
-        </dd>
-
-    </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dd>
+                        <img src="~/Imagens/Hoteis/@Model.Img" class="img-thumbnail" />
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="btn btn-warning pull-left" href="@Url.Action("Index","Hotels")"><span><i class="fa fa-arrow-left"></i> Voltar</span></a>
+                    <a href="@Url.Action("Edit",new { id = Model.Id })" class="btn btn-info pull-right"><span><i class="fa fa-edit"></i> Editar dados</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

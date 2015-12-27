@@ -4,85 +4,72 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Hotel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Cidade.Nome)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cidade.Nome)
-        </dd>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="text-center">Você realmente deseja apagar este hotel?</h3>
+                        <p class="">Obs: caso algum pacote de viajem possua reserva neste hotel a ação não será conluída.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <p class="text-center">@Html.DisplayFor(model => model.Nome)</p>
+                @if (!string.IsNullOrEmpty(Model.Img))
+            {
+                    <figure>
+                        <img  src="~/Imagens/Hoteis/@Model.Img" class="center-block img-thumbnail" />
+                    </figure>
+                    <hr />
+                    <dl class="">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Cidade.Nome)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Estado.Nome)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Cidade.Nome)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Estado.Nome)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Longradouro)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Longradouro)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Bairro)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Telefone)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Bairro)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Telefone)
-        </dd>
+                    </dl>
+                }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Longradouro)
-        </dt>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.Longradouro)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Bairro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Bairro)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cep)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cep)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Img)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Img)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                                <div class="form-actions">
+                                    <input type="submit" value="Apagar" class="btn btn-danger pull-right" /> 
+                                    <a href="@Url.Action("Index")" class="pull-left btn btn-warning">Voltar</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    }
+    </div>
 </div>
+

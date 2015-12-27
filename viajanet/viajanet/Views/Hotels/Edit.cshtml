@@ -3,100 +3,190 @@
 @{
     ViewBag.Title = "Edit";
 }
+    <!-- Start loading page level scripts and css for this page -->
+<link type="text/css" href="~/Content/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet"> <!-- Touchspin -->
+<link type="text/css" href="~/Content/assets/js/jqueryui.css" rel="stylesheet">        									<!-- jQuery UI CSS -->
+<script type="text/javascript" src="~/Content/assets/plugins/form-jasnyupload/fileinput.min.js"></script>               			<!-- File Input -->										<!-- Card -->
+<script type="text/javascript" src="~/Content/assets/demo/demo-formcomponents.js"></script>
+<!-- End loading page level scripts-->
+<h2>Edição</h2>
 
-<h2>Edit</h2>
 
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Hotel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Telefone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger phone" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Longradouro, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Longradouro, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Longradouro, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FK_Estado, "FK_Estado", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("FK_Estado", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.FK_Estado, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FK_Cidade, "FK_Cidade", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("FK_Cidade", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.FK_Cidade, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Bairro, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Bairro, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cep, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Cep, new { htmlAttributes = new { @class = "form-control cep" } })
-                @Html.ValidationMessageFor(model => model.Cep, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Img, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Img, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Img, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Hotel</h4>
+                <hr />
             </div>
         </div>
     </div>
-}
+    <div class="panel-body">
+        @using (Html.BeginForm("Edit", "Hotels", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <input id="imagemAntiga" type="hidden" name="imagemAntiga" value="@Model.Img" />
+            
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "sr-only" })
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class=" glyphicon glyphicon-list"></i>
+                                    </span>
+                                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                @Html.LabelFor(model => model.Telefone, htmlAttributes: new { @class = "sr-only" })
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-phone"></i>
+                                    </span>
+                                    @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control phone" } })
+                                    @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger phone" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                @Html.LabelFor(model => model.Longradouro, htmlAttributes: new { @class = "sr-only" })
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-map-marker"></i>
+                                    </span>
+                                    @Html.EditorFor(model => model.Longradouro, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Longradouro, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                @Html.LabelFor(model => model.FK_Estado, "estado", htmlAttributes: new { @class = "control-label  sr-only" })
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-map-marker"></i>
+                                    </span>
+                                    @Html.DropDownList("FK_Estado", null, htmlAttributes: new { @class = "form-control", @id = "estados" })
+                                    @Html.ValidationMessageFor(model => model.FK_Estado, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="Cidades" class="sr-only">Cidades</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-map-marker"></i>
+                                    </span>
+                                    @Html.DropDownList("FK_Cidade", null, htmlAttributes: new { @class = "form-control", @id = "cidades" })
+                                    @Html.ValidationMessageFor(model => model.FK_Cidade, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                @Html.LabelFor(model => model.Bairro, htmlAttributes: new { @class = "sr-only" })
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-map-marker"></i>
+                                    </span>
+                                    @Html.EditorFor(model => model.Bairro, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                @Html.LabelFor(model => model.Cep, htmlAttributes: new { @class = "sr-only" })
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-map-marker"></i>
+                                    </span>
+                                    @Html.EditorFor(model => model.Cep, new { htmlAttributes = new { @class = "form-control cep" } })
+                                    @Html.ValidationMessageFor(model => model.Cep, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="">
+                            <div class="fileinput fileinput-new" style="width: 100%;" data-provides="fileinput">
+                                <div class="fileinput-preview thumbnail mb20" data-trigger="fileinput" style="width: 100%; height: 150px;"></div>
+                                <div>
+                                    <span class="btn btn-info btn-file"><span class="fileinput-new">Trocar Imagem</span><span class="fileinput-exists">Mudar</span><input id="inputFile" type="file" name="Img"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div>
+                                <a class="btn btn-warning pull-left" href="@Url.Action("Index")"><span><i class="fa fa-arrow-left"></i> Voltar </span></a>
+                                <input type="submit" value="Salvar Mudanças" class="btn btn-success pull-right" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
 </div>
+
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    
+
+
+
+
     <script>
         $(document).ready(function () {
+           
+            // função que coloca a imagem antiga no input
+            var colocarImagemAntiga = function () {
+                var caminhoimagem = "/Imagens/Hoteis/";
+                var imagem = $("#imagemAntiga").val();
+                var caminho = caminhoimagem + imagem;
+                $(".fileinput-preview").append("<img id='imgAntiga'/>");
+                $(".fileinput-preview img").attr("src", caminho);
+            
+            }
+            colocarImagemAntiga(); // chamo a função pra colocar a imagem antiga
+
+            $("#inputFile").on("change", function () { // se o input file mudar eu removo a imagem antiga
+                if ($("#inputFile").val() != "")
+                    $("#imgAntiga").remove();
+                else {
+                    colocarImagemAntiga();
+                }
+            });
+          
             // init masks
             var maskBehavior = function (val) {
                 return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
@@ -111,7 +201,7 @@
             $('.cep').mask('00000-000');
 
             // end masks
-            
+
             $("#estados").change(function () {
 
                 estAtual = $("#estados").val();
