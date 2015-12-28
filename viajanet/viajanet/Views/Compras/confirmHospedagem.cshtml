@@ -247,11 +247,15 @@
                             @if (!string.IsNullOrEmpty(ViewBag.Hotel.Img)) // se tiver imgem ela será exibida
                             {
                                 <figure>
-                                   
                                     <img alt="Imagem do hotel" class="img-thumbnail" src="~/Imagens/Hoteis/@ViewBag.Hotel.Img" />
                                 </figure>
-                                
-                            } 
+                            }
+                            else
+                            {
+                                <figure>
+                                    <img src="~/Content/assets/img/imagem-nao-disponivel.png" class=" img-thumbnail">
+                                </figure>
+                            }
                         </div>
                     </div>
                     <!--End Hotel-->

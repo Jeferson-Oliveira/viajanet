@@ -4,13 +4,13 @@
     ViewBag.Title = "resultViajens";
 }
 
-<h2>resultViajens</h2>
+<h2>Viajens Encontradas</h2>
 
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h2>Hoteis</h2>
+                <h2>Viajens</h2>
                 <div class="panel-ctrls">
                 </div>
             </div>
@@ -78,8 +78,8 @@
                                     @Html.DisplayFor(modelItem => item.Valor)
                                 </td>
                                 <td style="white-space: nowrap;">
-                                    <a href="@Url.Action("hospedagemHoteis", "Compras",new { viagem = item.Id , cidade = item.FK_Cidade_Destino})" class="btn btn-success" title="Comprar" data-toggle="tooltip"><span>Comprar <i class="fa fa-shopping-bag"></i></span></a>
-                                    <a href="@Url.Action("Details",new { id = item.Id })" class="btn btn-info" title="Detalhes da viagem" data-toggle="tooltip"><span>Detalhes <i class="fa fa-list"></i></span></a>
+                                    <a href="@Url.Action("hospedagemHoteis", "Compras",new { viagem = item.Id , cidade = item.FK_Cidade_Destino})" class="btn btn-success btn-block" title="Comprar" data-toggle="tooltip"><span>Comprar <i class="fa fa-shopping-bag"></i></span></a>
+                                    
                                 </td>
                             </tr>
                         }

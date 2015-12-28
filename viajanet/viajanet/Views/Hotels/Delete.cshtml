@@ -4,8 +4,6 @@
     ViewBag.Title = "Delete";
 }
 
-
-
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
@@ -20,10 +18,15 @@
             <div class="panel-body">
                 <p class="text-center">@Html.DisplayFor(model => model.Nome)</p>
                 @if (!string.IsNullOrEmpty(Model.Img))
-            {
+                {
                     <figure>
                         <img  src="~/Imagens/Hoteis/@Model.Img" class="center-block img-thumbnail" />
                     </figure>
+                }
+                else
+                {
+                    <img src="~/Content/assets/img/imagem-nao-disponivel.png" class="center-block img-thumbnail">
+                }
                     <hr />
                     <dl class="">
                         <dt>
@@ -51,7 +54,7 @@
                         </dd>
 
                     </dl>
-                }
+                
 
                 <div class="panel-footer">
                     <div class="row">

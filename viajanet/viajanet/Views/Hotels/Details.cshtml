@@ -3,32 +3,7 @@
 @{
     ViewBag.Title = "Detalhes";
 }
-@if (TempData["Mensagem"] != null)
-{
-    if (TempData["tipo"].ToString() == "success")
-    {
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-success">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>Sucesso</strong> @TempData["Mensagem"];
-                </div>
-            </div>
-        </div>
-    }
-    else
-    {
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-danger">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>Erro</strong> @TempData["Mensagem"] , @TempData["Erro"];
-                </div>
-            </div>
-        </div>
-    }
-}
 <h2>Detalhes</h2>
 
 <div class="panel panel-default">
@@ -93,7 +68,15 @@
             <div class="col-md-6">
                 <dl class="dl-horizontal">
                     <dd>
-                        <img src="~/Imagens/Hoteis/@Model.Img" class="img-thumbnail" />
+                        @if (string.IsNullOrEmpty(Model.Img))
+                        {
+                            <img src="~/Content/assets/img/imagem-nao-disponivel.png" class="img-responsive img-thumbnail">
+                        }
+                        else
+                        {
+                            <img src="~/Imagens/Hoteis/@Model.Img" class="img-thumbnail" />
+                        }
+                        
                     </dd>
                 </dl>
             </div>

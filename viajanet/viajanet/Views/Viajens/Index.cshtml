@@ -3,34 +3,8 @@
 @{
     ViewBag.Title = "Index";
 }
-@if (TempData["Mensagem"] != null)
-{
-    if (TempData["tipo"].ToString() == "success")
-    {
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-success">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>Sucesso</strong> @TempData["Mensagem"];
-                </div>
-            </div>
-        </div>
-    }
-    else
-    {
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-danger">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>Erro</strong> @TempData["Mensagem"] , @TempData["Erro"];
-                </div>
-            </div>
-        </div>
-    }
-}
-
-<h2>Index</h2>
+<h2>Visualização</h2>
 
 <p>
     
@@ -41,7 +15,7 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h2>Hoteis</h2>
+                <h2>Viajens</h2>
                 <div class="panel-ctrls">
                 </div>
             </div>
@@ -80,9 +54,6 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                
-                                
-                                
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Estado.Nome)
                                 </td>

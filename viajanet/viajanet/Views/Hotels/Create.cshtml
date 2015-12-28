@@ -76,7 +76,7 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-map-marker"></i>
                                     </span>
-                                    @Html.DropDownList("FK_Estado", null, htmlAttributes: new { @class = "form-control", @id = "estados" })
+                                    @Html.DropDownList("FK_Estado", null, htmlAttributes: new { @class = "form-control", @id = "estados", @required = "required" })
                                     @Html.ValidationMessageFor(model => model.FK_Estado, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-map-marker"></i>
                                     </span>
-                                    <select id="cidades" name="FK_Cidade" class="form-control">
+                                    <select id="cidades" name="FK_Cidade" class="form-control" required="required">
                                         <option value="">Selecione o Estado</option>
                                     </select>
                                     @Html.ValidationMessageFor(model => model.FK_Cidade, "", new { @class = "text-danger" })

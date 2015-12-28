@@ -50,22 +50,58 @@
             <a data-toggle="tooltips" data-placement="right" title="Toggle Sidebar"><span class="icon-bg"><i class="fa fa-fw fa-bars"></i></span></a>
         </span>
 
-        <a class="navbar-brand" href="@Url.Action("Index","Home")">Avenger</a>
-
+        <a class="navbar-brand" href="@Url.Action("procurarViajens","Viajens")">Viajanet</a>
 
         <div class="yamm navbar-left navbar-collapse collapse in">
             <ul class="nav navbar-nav"></ul>
         </div>
-
-
         @if (Request.IsAuthenticated)
         {
             using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
             {
                 @Html.AntiForgeryToken()
+                <ul class="nav navbar-nav toolbar pull-right mr30">
+                    <li class="dropdown toolbar-icon-bg">
+                        <a href="#" class="hasnotifications dropdown-toggle" data-toggle="dropdown"><span class="icon-bg"><i class="fa fa-fw fa-bell"></i></span><span class="badge badge-info">5</span></a>
+                        <div class="dropdown-menu dropdown-alternate notifications arrow">
+                            <div class="dd-header">
+                                <span>Notificações</span>
+                            </div>
+                            <div class="scrollthis scroll-pane has-scrollbar">
+                                <ul class="scroll-content" tabindex="0" style="right: -17px;">
 
-                <ul class="nav navbar-nav toolbar">
-                    <li style="margin-right:18px;" class="dropdown toolbar-icon-bg mr-sm"><a title="Sair" data-toggle="tooltips" class="" href="javascript:document.getElementById('logoutForm').submit()"><span class="icon-bg"><i class="fa fa-fw fa-sign-out"></i></span></a></li>
+                                    <li class="">
+                                        <a href="#" class="notification-info">
+                                            <div class="notification-icon"><i class="fa fa-user fa-fw"></i></div>
+                                            <div class="notification-content">Profile Page has been updated</div>
+                                            <div class="notification-time">2m</div>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="">
+                                        <a href="#" class="notification-primary">
+                                            <div class="notification-icon"><i class="fa fa-users fa-fw"></i></div>
+                                            <div class="notification-content">New users request to join</div>
+                                            <div class="notification-time">35m</div>
+                                        </a>
+                                    </li>
+                                   
+                                </ul>
+                                <div class="scroll-track" style="display: none;"><div class="scroll-thumb" style="height: 20px; transform: translate(0px, 0px);"></div></div>
+                            </div>
+                            
+                        </div>
+                    </li>
+                    <li class="dropdown toolbar-icon-bg">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-bg"><i class="fa fa-fw fa-user"></i></span></a>
+                        <ul class="dropdown-menu userinfo arrow">
+                            <li><a href="@Url.Action("Index", "Manage", routeValues: null)"><span class="pull-left">Perfil</span> <i class="pull-right fa fa-user"></i></a></li>
+                            <li><a href="#"><span class="pull-left">Compras</span> <i class="pull-right fa fa-shopping-basket"></i></a></li>
+                                                 
+                            <li class="divider"></li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()"><span class="pull-left">Sair</span> <i class="pull-right fa fa-sign-out"></i></a></li>
+                        </ul>
+                    </li>
                 </ul>
             }
         }
@@ -81,16 +117,13 @@
                             <div class="widget-body welcome-box tabular">
                                 <div class="tabular-row">
                                     <div class="tabular-cell welcome-avatar">
-                                        <a href="#"><img src="http://placehold.it/300&text=Placeholder" class="avatar"></a>
+                                        <img src="~/Content/assets/img/userNone.png" class="avatar center-block">
                                     </div>
                                     <div class="tabular-cell welcome-options">
                                         @if (Request.IsAuthenticated)
                                         {
-
                                             <span class="welcome-text">Olá,</span>
-                                                @Html.ActionLink(User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "name" })
-
-
+                                            <p class="name"> @User.Identity.GetUserName()</p>
                                         }
                                     </div>
                                 </div>
@@ -146,6 +179,32 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-lg-12">
+                                        @if (TempData["Mensagem"] != null)
+                                        {
+                                            if (TempData["tipo"].ToString() == "success")
+                                            {
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="alert alert-success">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong><i class="fa fa-check"></i></strong> @TempData["Mensagem"]
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="alert alert-danger">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong><i class="fa fa-exclamation-circle"></i></strong> @TempData["Mensagem"] , @TempData["Erro"]
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
                                         @RenderBody()
                                     </div>
                                 </div>

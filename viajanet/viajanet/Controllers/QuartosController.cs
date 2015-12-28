@@ -51,12 +51,26 @@ namespace viajanet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,Fk_Hotel,Descricao,Diaria,Capacidade,Suite")] Quarto quarto)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Quarto.Add(quarto);
-                await db.SaveChangesAsync();
+                if (ModelState.IsValid)
+                {
+                    db.Quarto.Add(quarto);
+                    await db.SaveChangesAsync();
+                    TempData["Mensagem"] = "Quarto adicionado com";
+                    TempData["tipo"] = "success";
+                    return RedirectToAction("Index");
+                }
+
+            }
+            catch (Exception e)
+            {
+                TempData["Mensagem"] = "Ocorreu um erro ao editar este quarto , erro:";
+                TempData["tipo"] = "error";
+                TempData["Erro"] = e.GetType().Name;
                 return RedirectToAction("Index");
             }
+            
 
             ViewBag.Fk_Hotel = new SelectList(db.Hotel, "Id", "Nome", quarto.Fk_Hotel);
             return View(quarto);
@@ -85,12 +99,24 @@ namespace viajanet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Fk_Hotel,Descricao,Diaria,Capacidade,Suite")] Quarto quarto)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(quarto).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index","Hotels");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(quarto).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    TempData["Mensagem"] = "Edições realizadas com sucesso!";
+                    TempData["tipo"] = "success";
+                    return RedirectToAction("viewQuartosHotel", "Quartos", new { id = quarto.Fk_Hotel });
+                }
+            }catch(Exception e)
+            {
+                TempData["Mensagem"] = "Ocorreu um erro ao editar este quarto , erro:";
+                TempData["tipo"] = "error";
+                TempData["Erro"] = e.GetType().Name;
+                return RedirectToAction("viewQuartosHotel", "Quartos", new { id = quarto.Fk_Hotel });
             }
+            
             ViewBag.Fk_Hotel = new SelectList(db.Hotel, "Id", "Nome", quarto.Fk_Hotel);
             return View(quarto);
         }
@@ -116,9 +142,23 @@ namespace viajanet.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Quarto quarto = await db.Quarto.FindAsync(id);
-            db.Quarto.Remove(quarto);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index","Hotels");
+            try
+            {
+                db.Quarto.Remove(quarto);
+                await db.SaveChangesAsync();
+                TempData["Mensagem"] = "Quarto apagado com sucesso!";
+                TempData["tipo"] = "success";
+                return RedirectToAction("viewQuartosHotel", "Quartos", new { id = quarto.Fk_Hotel });
+
+            }
+            catch (Exception e)
+            {
+                TempData["Mensagem"] = "Ocorreu um erro ao deletar este quarto , erro:";
+                TempData["tipo"] = "error";
+                TempData["Erro"] = e.GetType().Name;
+                return RedirectToAction("viewQuartosHotel", "Quartos", new { id = quarto.Fk_Hotel });
+            }
+           
         }
 
         protected override void Dispose(bool disposing)
@@ -152,12 +192,25 @@ namespace viajanet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateQuartoHotel([Bind(Include = "Id,Fk_Hotel,Descricao,Diaria,Capacidade,Suite")] Quarto quarto)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Quarto.Add(quarto);
-                await db.SaveChangesAsync();
-                return RedirectToAction("viewQuartosHotel",new {@id = quarto.Fk_Hotel });
+                if (ModelState.IsValid)
+                {
+                    db.Quarto.Add(quarto);
+                    await db.SaveChangesAsync();
+                    TempData["Mensagem"] = "Quarto adicionado com sucesso!";
+                    TempData["tipo"] = "success";
+                    return RedirectToAction("viewQuartosHotel", new { @id = quarto.Fk_Hotel });
+                }
             }
+            catch(Exception e)
+            {
+                TempData["Mensagem"] = "Ocorreu um erro ao adicionar este quarto , erro:";
+                TempData["tipo"] = "error";
+                TempData["Erro"] = e.GetType().Name;
+                return RedirectToAction("viewQuartosHotel", new { @id = quarto.Fk_Hotel });
+            }
+           
 
             ViewBag.Fk_Hotel = new SelectList(db.Hotel, "Id", "Nome", quarto.Fk_Hotel);
             return View(quarto);

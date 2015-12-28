@@ -55,13 +55,27 @@ namespace viajanet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,FK_Estado_Saida,FK_Cidade_Saida,FK_Estado_Destino,FK_Cidade_Destino,Valor,Data_Ida,Data_Volta,FK_Companhia")] Viajem viajem)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Viajem.Add(viajem);
-                await db.SaveChangesAsync();
+                if (ModelState.IsValid)
+                {
+                    db.Viajem.Add(viajem);
+                    await db.SaveChangesAsync();
+                    TempData["Mensagem"] = "Viajem cadastrada com sucesso!";
+                    TempData["tipo"] = "success";
+                    return RedirectToAction("Index");
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                TempData["Mensagem"] = "Ocorreu um erro ao cadastrar esta viajem erro:";
+                TempData["tipo"] = "error";
+                TempData["Erro"] = e.GetType().Name;
                 return RedirectToAction("Index");
             }
-
+           
             ViewBag.FK_Cidade_Destino = new SelectList(db.Cidade, "Id", "Nome", viajem.FK_Cidade_Destino);
             ViewBag.FK_Cidade_Saida = new SelectList(db.Cidade, "Id", "Nome", viajem.FK_Cidade_Saida);
             ViewBag.FK_Companhia = new SelectList(db.Companhia, "Id", "Nome", viajem.FK_Companhia);
@@ -123,12 +137,26 @@ namespace viajanet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,FK_Estado_Saida,FK_Cidade_Saida,FK_Estado_Destino,FK_Cidade_Destino,Valor,Data_Ida,Data_Volta,FK_Companhia")] Viajem viajem)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(viajem).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                if (ModelState.IsValid)
+                {
+                    db.Entry(viajem).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    TempData["Mensagem"] = "Edições realizadas comm sucesso!";
+                    TempData["tipo"] = "success";
+                    return RedirectToAction("Index");
+                }
+
+            }
+            catch (Exception e)
+            {
+                TempData["Mensagem"] = "Ocorreu um erro ao editar esta viajem , erro:";
+                TempData["tipo"] = "error";
+                TempData["Erro"] = e.GetType().Name;
                 return RedirectToAction("Index");
             }
+            
             ViewBag.FK_Cidade_Destino = new SelectList(db.Cidade, "Id", "Nome", viajem.FK_Cidade_Destino);
             ViewBag.FK_Cidade_Saida = new SelectList(db.Cidade, "Id", "Nome", viajem.FK_Cidade_Saida);
             ViewBag.FK_Companhia = new SelectList(db.Companhia, "Id", "Nome", viajem.FK_Companhia);
@@ -184,9 +212,19 @@ namespace viajanet.Controllers
 
             var Csaida = Convert.ToInt32(result["CidadeSaida"]); // eu só preciso das Id's da cidade pra fazer a pesquisa
             var Cdestino = Convert.ToInt32(result["CidadeDestino"]);
-            var viajens = db.Viajem.Include(v => v.Cidade).Include(v => v.Cidade1).Include(v => v.Companhia).Include(v => v.Estado).Include(v => v.Estado1).Where(v => v.FK_Cidade_Saida == Csaida).Where(v => v.FK_Cidade_Destino == Cdestino);
-            
-            return View(viajens.ToList());
+            try
+            {
+                var viajens = db.Viajem.Include(v => v.Cidade).Include(v => v.Cidade1).Include(v => v.Companhia).Include(v => v.Estado).Include(v => v.Estado1).Where(v => v.FK_Cidade_Saida == Csaida).Where(v => v.FK_Cidade_Destino == Cdestino);
+                return View(viajens.ToList());
+
+            }
+            catch (Exception e)
+            {
+                TempData["Mensagem"] = "Ocorreu um erro ao caregar as viajens , erro:";
+                TempData["tipo"] = "error";
+                TempData["Erro"] = e.GetType().Name;
+                return RedirectToAction("procurarViajens");
+            }
         } 
 
         protected override void Dispose(bool disposing)

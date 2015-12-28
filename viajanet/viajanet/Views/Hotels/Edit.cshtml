@@ -77,7 +77,7 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-map-marker"></i>
                                     </span>
-                                    @Html.DropDownList("FK_Estado", null, htmlAttributes: new { @class = "form-control", @id = "estados" })
+                                    @Html.DropDownList("FK_Estado", null, htmlAttributes: new { @class = "form-control", @id = "estados", @required = "required" })
                                     @Html.ValidationMessageFor(model => model.FK_Estado, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-map-marker"></i>
                                     </span>
-                                    @Html.DropDownList("FK_Cidade", null, htmlAttributes: new { @class = "form-control", @id = "cidades" })
+                                    @Html.DropDownList("FK_Cidade", null, htmlAttributes: new { @class = "form-control", @id = "cidades", @required = "required" })
                                     @Html.ValidationMessageFor(model => model.FK_Cidade, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -170,9 +170,16 @@
            
             // função que coloca a imagem antiga no input
             var colocarImagemAntiga = function () {
-                var caminhoimagem = "/Imagens/Hoteis/";
                 var imagem = $("#imagemAntiga").val();
-                var caminho = caminhoimagem + imagem;
+                var caminho = "";
+                if (imagem != "") {
+                caminhoimagem = "/Imagens/Hoteis/";
+                caminho = caminhoimagem + imagem;
+               
+                } else {
+                    var caminho = "/Content/assets/img/imagem-nao-disponivel.png";
+                  
+                }
                 $(".fileinput-preview").append("<img id='imgAntiga'/>");
                 $(".fileinput-preview img").attr("src", caminho);
             

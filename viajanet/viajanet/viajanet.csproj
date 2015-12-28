@@ -499,6 +499,7 @@
     <Content Include="Content\assets\img\flags\za.png" />
     <Content Include="Content\assets\img\flags\zm.png" />
     <Content Include="Content\assets\img\flags\zw.png" />
+    <Content Include="Content\assets\img\imagem-nao-disponivel.png" />
     <Content Include="Content\assets\img\login-logo.png" />
     <Content Include="Content\assets\img\logo.png" />
     <Content Include="Content\assets\img\navbar-links-toggle-default.png" />
@@ -519,6 +520,7 @@
     <Content Include="Content\assets\img\sidebar-toggle.png" />
     <Content Include="Content\assets\img\task-drag-pattern.png" />
     <Content Include="Content\assets\img\task-lines-red.png" />
+    <Content Include="Content\assets\img\userNone.png" />
     <Content Include="Content\assets\js\application.js" />
     <Content Include="Content\assets\js\bootstrap.min.js" />
     <Content Include="Content\assets\js\enquire.min.js" />

@@ -27,6 +27,21 @@
 </head>
 <body style="padding-top:80px;">
     <div class="container" id="login-form">
+        @if (TempData["Mensagem"] != null)
+        {
+            if (TempData["tipo"].ToString() != "success")
+            {
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Erro</strong> @TempData["Mensagem"] , @TempData["Erro"];
+                        </div>
+                    </div>
+                </div>
+            }
+        }
         <div class="row">
             <div class="col-md-4 col-md-offset-4 col-sm-height.col-middle">
                 <div class="panel panel-default">
@@ -47,7 +62,7 @@
                                         <span class="input-group-addon">
                                             <i class="fa fa-user"></i>
                                         </span>
-                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", @required = "required" })
                                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -60,7 +75,7 @@
                                         <span class="input-group-addon">
                                             <i class="fa fa-key"></i>
                                         </span>
-                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Senha" })
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Senha", @required = "required" })
                                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
