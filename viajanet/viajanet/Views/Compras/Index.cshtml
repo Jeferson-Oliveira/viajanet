@@ -29,6 +29,18 @@
         <th>
             @Html.DisplayNameFor(model => model.Valor_Total)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroCartao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeTitular)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Expiracao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CVC)
+        </th>
         <th></th>
     </tr>
 
@@ -51,6 +63,18 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Valor_Total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroCartao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeTitular)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Expiracao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CVC)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

@@ -136,3 +136,6 @@ D:\Usuários\Documents\Visual Studio 2015\Projects\viajanetcsharp\viajanet\viaja
 D:\Usuários\Documents\Visual Studio 2015\Projects\viajanetcsharp\viajanet\viajanet\obj\Debug\viajanet.dll
 D:\Usuários\Documents\Visual Studio 2015\Projects\viajanetcsharp\viajanet\viajanet\obj\Debug\viajanet.pdb
 D:\Usuários\Documents\Visual Studio 2015\Projects\viajanetcsharp\viajanet\viajanet\obj\Debug\viajanet.csprojResolveAssemblyReference.cache
+D:\Usuários\Documents\Visual Studio 2015\Projects\viajanetcsharp\viajanet\viajanet\obj\Debug\viajanet.Migrations.InitialCreate.resources
+D:\Usuários\Documents\Visual Studio 2015\Projects\viajanetcsharp\viajanet\viajanet\obj\Debug\viajanet.csproj.GenerateResource.Cache
+D:\Usuários\Documents\Visual Studio 2015\Projects\viajanetcsharp\viajanet\viajanet\obj\Debug\viajanet.Migrations.AddCompra.resources

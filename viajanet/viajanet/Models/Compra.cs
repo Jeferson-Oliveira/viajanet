@@ -24,7 +24,10 @@ namespace viajanet.Models
         public int? Qtd_Criancas { get; set; }
 
         public double Valor_Total { get; set; }
-
+        public string NumeroCartao { get; set; }
+        public string NomeTitular { get; set; }
+        public string Expiracao { get; set; }
+        public string CVC { get; set; }
         public virtual Hotel Hotel { get; set; }
 
         public virtual Viajem Viajem { get; set; }

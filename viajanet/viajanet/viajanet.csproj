@@ -179,6 +179,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512291222509_InitialCreate.cs" />
+    <Compile Include="Migrations\201512291222509_InitialCreate.Designer.cs">
+      <DependentUpon>201512291222509_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512291230128_AddCompra.cs" />
+    <Compile Include="Migrations\201512291230128_AddCompra.Designer.cs">
+      <DependentUpon>201512291230128_AddCompra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cidade.cs" />
@@ -1991,6 +1999,11 @@
     <Content Include="Content\bootstrap-select.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\card-master\.gitignore" />
+    <Content Include="Content\card-master\.gitmodules" />
+    <Content Include="Content\card-master\example\index.html" />
+    <Content Include="Content\card-master\lib\js\card.js" />
+    <Content Include="Content\card-master\lib\js\jquery.card.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2325,6 +2338,34 @@
     <Content Include="Content\assets\plugins\inputTelMask\src\js\wrapper.js.ejs" />
     <Content Include="Scripts\bootstrap-select.js.map" />
     <Content Include="Content\bootstrap-select.css.map" />
+    <Content Include="Content\card-master\bower.json" />
+    <Content Include="Content\card-master\CONTRIBUTING.md" />
+    <Content Include="Content\card-master\gulpfile.coffee" />
+    <Content Include="Content\card-master\LICENSE" />
+    <Content Include="Content\card-master\package.json" />
+    <Content Include="Content\card-master\README.md" />
+    <Content Include="Content\card-master\src\coffee\card.coffee" />
+    <Content Include="Content\card-master\src\coffee\jquery.card.coffee" />
+    <Content Include="Content\card-master\src\scss\browsers\_ie.scss" />
+    <Content Include="Content\card-master\src\scss\browsers\_safari.scss" />
+    <Content Include="Content\card-master\src\scss\card.scss" />
+    <Content Include="Content\card-master\src\scss\cards\_amex.scss" />
+    <Content Include="Content\card-master\src\scss\cards\_card.scss" />
+    <Content Include="Content\card-master\src\scss\cards\_dankort.scss" />
+    <Content Include="Content\card-master\src\scss\cards\_discover.scss" />
+    <Content Include="Content\card-master\src\scss\cards\_elo.scss" />
+    <Content Include="Content\card-master\src\scss\cards\_maestro.scss" />
+    <Content Include="Content\card-master\src\scss\cards\_mastercard.scss" />
+    <Content Include="Content\card-master\src\scss\cards\_visa.scss" />
+    <Content Include="Content\card-master\src\scss\logos\_amex.scss" />
+    <Content Include="Content\card-master\src\scss\logos\_dankort.scss" />
+    <Content Include="Content\card-master\src\scss\logos\_discover.scss" />
+    <Content Include="Content\card-master\src\scss\logos\_elo.scss" />
+    <Content Include="Content\card-master\src\scss\logos\_logo.scss" />
+    <Content Include="Content\card-master\src\scss\logos\_maestro.scss" />
+    <Content Include="Content\card-master\src\scss\logos\_mastercard.scss" />
+    <Content Include="Content\card-master\src\scss\logos\_visa.scss" />
+    <Content Include="Content\card-master\src\scss\_mixins.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\currency.js" />
     <Content Include="Scripts\i18n\defaults-ar_AR.js" />
@@ -2511,17 +2552,19 @@
     <Content Include="Views\Quartos\CreateQuartoHotel.cshtml" />
     <Content Include="Views\Viajens\procurarViajens.cshtml" />
     <Content Include="Views\Viajens\resultViajens.cshtml" />
-    <Content Include="Views\Compras\Create.cshtml" />
     <Content Include="Views\Compras\Delete.cshtml" />
     <Content Include="Views\Compras\Details.cshtml" />
     <Content Include="Views\Compras\Edit.cshtml" />
-    <Content Include="Views\Compras\Index.cshtml" />
     <Content Include="Views\Compras\hospedagemHoteis.cshtml" />
     <Content Include="Views\Compras\confirmHospedagem.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\Compras\Index.cshtml" />
+    <Content Include="Views\Compras\Create.cshtml" />
+    <Content Include="Views\Compras\viewCompras.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\card-master\src\scss\bourbon\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -2530,6 +2573,14 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201512291222509_InitialCreate.resx">
+      <DependentUpon>201512291222509_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512291230128_AddCompra.resx">
+      <DependentUpon>201512291230128_AddCompra.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

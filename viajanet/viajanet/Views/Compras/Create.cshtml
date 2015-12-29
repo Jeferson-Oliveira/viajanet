@@ -10,261 +10,97 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-
-
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            @Html.AntiForgeryToken()
-        </div>
-        <div class="panel-body">
-            <div class="form-horizontal">
-                <hr />
-                <input type="hidden" name="Fk_Usuario" value="@User.Identity.GetUserId()" />
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <label for="" class="control-label">
-                                    Responsável
-                                </label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class=""></i>
-                                        <label class="form-control text-left"></label>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <label for="" class="control-label">
-                                    Quantidade de crianças
-                                </label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-arrow-up"></i>
-                                    </span>
-                                    <input id="qtdCr" type="number" value="0" name="Qtd_Criancas" required class="form-control" min="0" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <label for="" class="control-label">
-                                    Quantidade de adultos
-                                </label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-arrow-up"></i>
-                                    </span>
-                                    <input id="qtdAd" type="number" required name="Qtd_Adultos" value="1" class="form-control" min="1" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <label for="" class="control-label">
-                                    Valor Total
-                                </label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-money"></i>
-                                    </span>
-                                    <input id="valorTotal" type="text" name="Valor_Total" readonly required class="form-control" value="@ViewBag.Viajem.Valor" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr />
-                <!--viagem--->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="page-header">
-                            <h4>Informações da viajem</h4>
-                        </div>
-                    </div>
-                </div>
-                <input type="hidden" name="FK_Viajem" value="@ViewBag.Viajem.Id" />
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <label for="" class="control-label">
-                                    De
-                                </label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-map-marker"></i>
-                                    </span>
-                                    <input class="form-control" type="text" readonly value="@ViewBag.Viajem.Cidade.Nome" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <label for="" class="control-label">
-                                    Data de embarque
-                                </label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </span>
-                                    <input class="form-control" readonly value="@ViewBag.Viajem.Data_Ida.ToShortDateString()" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label for="" class="control-label">
-                                        Para
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-map-marker"></i>
-                                        </span>
-                                        <input type="text" readonly class="form-control" value="@ViewBag.Viajem.Cidade1.Nome" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label for="" class="control-label">
-                                        Data de retorno
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
-                                        <input type="text" readonly class="form-control" value="@ViewBag.Viajem.Data_Volta.ToShortDateString()" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label for="" class="control-label">
-                                        Valor
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-money"></i>
-                                        </span>
-                                        <input id="valorViajem" type="text" readonly class="form-control" value="@ViewBag.Viajem.Valor" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr />
-
-
-                @if (ViewBag.Hotel != null) // esta parte só será exibida se o usuário selecionou um hotel
-                {
-                    <!--Hotel--->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="page-header">
-                                <h4>Informações do hotel</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="hidden" name="FK_Hotel" value="@ViewBag.Hotel.Id" />
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label for="" class="control-label">
-                                        Hotel
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-bed"></i>
-                                        </span>
-                                        <input type="text" readonly class="form-control" value="@ViewBag.Hotel.Nome" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label for="" class="control-label">
-                                        Bairro
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-map-marker"></i>
-                                        </span>
-                                        <input type="text" readonly class="form-control" value="@ViewBag.Hotel.Bairro" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label for="" class="control-label">
-                                        Longradouro (Rua/Avenida/Setor)
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-map-marker"></i>
-                                        </span>
-                                        <input type="text" readonly class="form-control" value="@ViewBag.Hotel.Longradouro" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label for="" class="control-label">
-                                        CEP
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-map-o"></i>
-                                        </span>
-                                        <input class="form-control" type="text" readonly value="@ViewBag.Hotel.Cep" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label for="" class="control-label">
-                                        Telefone
-                                    </label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-phone"></i>
-                                        </span>
-                                        <input class="form-control" type="text" readonly value="@ViewBag.Hotel.Telefone" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            @if (!string.IsNullOrEmpty(ViewBag.Hotel.Img)) // se tiver imgem ela será exibida
-                            {
-                                <figure>
-
-                                    <img alt="Imagem do hotel" class="img-thumbnail" src="@ViewBag.Hotel.Img" />
-                                </figure>
-
-                            }
-                        </div>
-                    </div>
-                    <!--End Hotel-->
-
-                }
-
+    
+    <div class="form-horizontal">
+        <h4>Compra</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fk_Usuario, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fk_Usuario, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Fk_Usuario, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="panel-footer">
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.FK_Viajem, "FK_Viajem", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("FK_Viajem", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FK_Viajem, "", new { @class = "text-danger" })
+            </div>
         </div>
-    
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FK_Hotel, "FK_Hotel", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("FK_Hotel", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FK_Hotel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Qtd_Adultos, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Qtd_Adultos, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Qtd_Adultos, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Qtd_Criancas, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Qtd_Criancas, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Qtd_Criancas, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Valor_Total, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Valor_Total, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Valor_Total, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumeroCartao, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumeroCartao, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NumeroCartao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomeTitular, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NomeTitular, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NomeTitular, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Expiracao, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Expiracao, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Expiracao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CVC, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CVC, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CVC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
 }
 
 <div>

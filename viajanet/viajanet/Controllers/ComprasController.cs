@@ -169,7 +169,7 @@ namespace viajanet.Controllers
 
         // POST: /Create
         [HttpPost]
-        public ActionResult confirmCompra([Bind(Include = "Id,Fk_Usuario,FK_Viajem,FK_Hotel,Qtd_Adultos,Qtd_Criancas,Valor_Total")] FormCollection collection)
+        public ActionResult confirmCompra([Bind(Include = "Id,Fk_Usuario,FK_Viajem,FK_Hotel,Qtd_Adultos,Qtd_Criancas,Valor_Total,NomeTitular,CVC,Expiracao,NumeroCartao")] FormCollection collection)
         {
             try
             {
@@ -182,11 +182,14 @@ namespace viajanet.Controllers
                 compra.Qtd_Adultos = Convert.ToInt32(collection["Qtd_Adultos"]);
                 compra.Qtd_Criancas = Convert.ToInt32(collection["Qtd_Criancas"]);
                 compra.Valor_Total = Convert.ToDouble(collection["Valor_Total"]);
-
+                compra.NomeTitular = collection["name"];
+                compra.NumeroCartao = collection["number"];
+                compra.Expiracao = collection["expiry"];
+                compra.CVC = collection["cvc"];
                 db.Compra.Add(compra);
                 db.SaveChanges();
-
-                return RedirectToAction("Index");
+                TempData["Compra"] = "Compra realizada com sucesso!";
+                return RedirectToAction("procurarViajens","Viajens");
             }
             catch
             {
@@ -194,6 +197,26 @@ namespace viajanet.Controllers
             }
         }
 
+
+        public ActionResult viewCompras()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(Request["user"]))
+                {
+                    string id = Request["user"];
+                    var compras = db.Compra.Include(c => c.Hotel).Include(c => c.Viajem).Where(c => c.Fk_Usuario == id);
+                    return View(compras.ToList());
+                }
+            }catch(Exception e)
+            {
+                TempData["Mensagem"] = "Ocorreu um erro ao tentar listar suas compras , erro:";
+                TempData["tipo"] = "error";
+                TempData["Erro"] = e.GetType().Name;
+                RedirectToAction("procurarViajens", "Viajens");
+            }
+            return View();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

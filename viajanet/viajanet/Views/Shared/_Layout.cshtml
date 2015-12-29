@@ -5,7 +5,7 @@
 }
 <!DOCTYPE html>
 <html>
-<head>
+<head id="head">
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
@@ -40,8 +40,19 @@
     <script src="~/Scripts/bootstrap-select.min.js"></script>
     @RenderSection("scripts", required: false)
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#not").click(function () {
+                $(".badge-info").empty();
+
+            });
+            $(".notificacao").click(function () {
+                $(".scroll-content").empty();
+            });
+        });
+    </script>
 </head>
-<body class="infobar-offcanvas">
+<body class="infobar-offcanvas @if (TempData["sidebar"] != null) { @Html.Raw("sidebar-collapsed"); } ">
 
 
     <header id="topnav" class="navbar navbar-midnightblue navbar-fixed-top clearfix" role="banner">
@@ -62,30 +73,36 @@
                 @Html.AntiForgeryToken()
                 <ul class="nav navbar-nav toolbar pull-right mr30">
                     <li class="dropdown toolbar-icon-bg">
-                        <a href="#" class="hasnotifications dropdown-toggle" data-toggle="dropdown"><span class="icon-bg"><i class="fa fa-fw fa-bell"></i></span><span class="badge badge-info">5</span></a>
+                        <a href="#" class="hasnotifications dropdown-toggle" data-toggle="dropdown"><span id="not" class="icon-bg"><i class="fa fa-fw fa-bell"></i></span><span class="badge badge-info">@if (TempData["Compra"] != null || TempData["Registro"] != null) { <i class="fa fa-exclamation"></i> }</span></a>
                         <div class="dropdown-menu dropdown-alternate notifications arrow">
                             <div class="dd-header">
                                 <span>Notificações</span>
                             </div>
                             <div class="scrollthis scroll-pane has-scrollbar">
                                 <ul class="scroll-content" tabindex="0" style="right: -17px;">
+                                    @if (TempData["Registro"] != null)
+                                    {
+                                        <li class="notificacao">
+                                            <a href="#" class="notification-info">
+                                                <div class="notification-icon"><i class="fa fa-user fa-fw"></i></div>
+                                                <div class="notification-content">@TempData["Registro"]</div>
 
-                                    <li class="">
-                                        <a href="#" class="notification-info">
-                                            <div class="notification-icon"><i class="fa fa-user fa-fw"></i></div>
-                                            <div class="notification-content">Profile Page has been updated</div>
-                                            <div class="notification-time">2m</div>
+                                            </a>
+                                        </li>
+                                    }
+
+                                    @if (TempData["Compra"] != null)
+                                    {
+                                    <li class="notificacao">
+                                        <a href="@Url.Action("viewCompras", "Compras", new { user = User.Identity.GetUserId() })" class="notification-info">
+                                            <div class="notification-icon"><i class="fa fa-shopping-cart fa-fw"></i></div>
+                                            <div class="notification-content">@TempData["Compra"]</div>
+                                            
                                         </a>
                                     </li>
-                                    
-                                    <li class="">
-                                        <a href="#" class="notification-primary">
-                                            <div class="notification-icon"><i class="fa fa-users fa-fw"></i></div>
-                                            <div class="notification-content">New users request to join</div>
-                                            <div class="notification-time">35m</div>
-                                        </a>
-                                    </li>
-                                   
+                                    }
+
+
                                 </ul>
                                 <div class="scroll-track" style="display: none;"><div class="scroll-thumb" style="height: 20px; transform: translate(0px, 0px);"></div></div>
                             </div>
@@ -96,7 +113,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-bg"><i class="fa fa-fw fa-user"></i></span></a>
                         <ul class="dropdown-menu userinfo arrow">
                             <li><a href="@Url.Action("Index", "Manage", routeValues: null)"><span class="pull-left">Perfil</span> <i class="pull-right fa fa-user"></i></a></li>
-                            <li><a href="#"><span class="pull-left">Compras</span> <i class="pull-right fa fa-shopping-basket"></i></a></li>
+                            <li><a href="@Url.Action("viewCompras", "Compras", new { user = User.Identity.GetUserId() })"><span class="pull-left">Compras</span> <i class="pull-right fa fa-shopping-basket"></i></a></li>
                                                  
                             <li class="divider"></li>
                             <li><a href="javascript:document.getElementById('logoutForm').submit()"><span class="pull-left">Sair</span> <i class="pull-right fa fa-sign-out"></i></a></li>
@@ -123,7 +140,7 @@
                                         @if (Request.IsAuthenticated)
                                         {
                                             <span class="welcome-text">Olá,</span>
-                                            <p class="name"> @User.Identity.GetUserName()</p>
+                                            <p class="name"> Seja Bem Vindo!</p>
                                         }
                                     </div>
                                 </div>
@@ -133,12 +150,12 @@
                             <nav role="navigation" class="widget-body">
                                 <ul class="acc-menu">
                                     <li class="nav-separator">Menu</li>
-                                    <li><a href="@Url.Action("Index","Home")"><i class="fa fa-home"></i><span>Página Inicial</span></a></li>
+                                    <li><a href="@Url.Action("procurarViajens","Viajens")"><i class="fa fa-home"></i><span>Página Inicial</span></a></li>
                                     <li>
-                                        <a href="javascript:;"><i class="fa fa-user"></i><span>Clientes</span></a>
+                                        <a href="javascript:;"><i class="fa fa-shopping-bag"></i><span>Compras</span></a>
                                         <ul class="acc-menu">
-                                            <li><a href="#">Cadastrar Clientes</a></li>
-                                            <li><a href="#">Visualizar Clientes</a></li>
+                                            <li><a href="@Url.Action("procurarViajens","Viajens")">Realizar Compra </a></li>
+                                            <li><a href="@Url.Action("viewCompras", "Compras", new { user = User.Identity.GetUserId() })">Visualizar Minhas Compras</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-separator">Hoteis e Viajens</li>

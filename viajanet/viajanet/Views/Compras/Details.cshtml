@@ -4,63 +4,97 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalhes</h2>
 
-<div>
-    <h4>Compra</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Hotel.Nome)
-        </dt>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Detalhes sobre sua viagem</h3>
+    </div>
+    <div id="dados" class="panel-body">
+        <h4 class="">Viagem</h4>
+        <div class="row">
+            <div class="col-md-4">
+               
+                <dl>
+                    <dt>De</dt>
+                    <dd>@Model.Viajem.Cidade1.Nome</dd>
+                    <dt>Data de embarque</dt>
+                    <dd>@Model.Viajem.Data_Ida.ToShortDateString()</dd>
+                   
+                </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.Hotel.Nome)
-        </dd>
+            </div>
+            <div class="col-md-4">
+                <dl>
+                    <dt>Para</dt>
+                    <dd>@Model.Viajem.Cidade.Nome</dd>
+                    <dt>Data de Retorno</dt>
+                    <dd>@Model.Viajem.Data_Volta.ToShortDateString()</dd>
+                  
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <dl>
+                    <dt>Quantidade de Adultos</dt>
+                    <dd>@Model.Qtd_Adultos</dd>
+                    <dt>Quantidade de Crianças</dt>
+                    <dd>@Model.Qtd_Criancas</dd>
+                    
+                    <dt>Valor Total</dt>
+                    <dd>R$ @Model.Valor_Total</dd>
+                </dl>
+            </div>
+            <dl>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Viajem.Id)
-        </dt>
+            </dl>
+        </div>
+        @if (Model.FK_Hotel != null)
+        {
+            <hr />
+            <h4>Hotel</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <dl>
+                        <dt>Nome</dt>
+                        <dd>@Model.Hotel.Nome</dd>
+                        <dt>Telefone</dt>
+                        <dd>@Model.Hotel.Telefone</dd>
+                        <dt>Localização</dt>
+                        <dd>@Model.Hotel.Longradouro , @Model.Hotel.Bairro</dd>
+                    </dl>
+                </div>
+                
+            </div>
+        }
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Pagamento</h4>
+                <dl>
+                    <dt>Titular do cartão</dt>
+                    <dd>@Model.NomeTitular</dd>
+                    <dt>Numero do Cartão</dt>
+                    <dd>@Model.NumeroCartao</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Viajem.Id)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Fk_Usuario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fk_Usuario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Qtd_Adultos)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Qtd_Adultos)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Qtd_Criancas)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Qtd_Criancas)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Valor_Total)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Valor_Total)
-        </dd>
-
-    </dl>
+                </dl>
+            </div>
+        </div>
+        
+    </div>
+    <div class="panel-footer">
+        <button id="imprimir" onclick="printContent('dados')" class="btn btn-default pull-right">Imprimir <i class="fa fa-print"></i></button>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+
+
+<script>
+function printContent(el){
+	var restorepage = document.body.innerHTML;
+	var printcontent = document.getElementById(el).innerHTML;
+	document.body.innerHTML = printcontent;
+	window.print();
+	document.body.innerHTML = restorepage;
+}
+</script>
+

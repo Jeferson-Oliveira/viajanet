@@ -71,10 +71,10 @@
                                 </td>
                                 
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Data_Ida)
+                                    @item.Data_Ida.ToShortDateString()
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Data_Volta)
+                                    @item.Data_Volta.ToShortDateString()
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Valor)
