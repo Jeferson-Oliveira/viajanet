@@ -8,7 +8,7 @@ $(document).ready(function() {
     		"lengthMenu": "_MENU_"
     	}
     });
-    $('.dataTables_filter input').attr('placeholder','Search...');
+    $('.dataTables_filter input').attr('placeholder','Procurar...');
 
 
     //DOM Manipulation to move datatable elements integrate to panel
