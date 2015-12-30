@@ -11,7 +11,7 @@ namespace viajanet.Models
             : base("name=ViajanetContext")
         {
         }
-
+       
         public virtual DbSet<Cidade> Cidade { get; set; }
         public virtual DbSet<Companhia> Companhia { get; set; }
         public virtual DbSet<Compra> Compra { get; set; }

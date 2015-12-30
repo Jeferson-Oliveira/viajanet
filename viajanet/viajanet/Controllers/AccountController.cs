@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using viajanet.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace viajanet.Controllers
 {
@@ -165,10 +166,27 @@ namespace viajanet.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email , Nome = model.Nome , Sobrenome = model.Sobrenome , Telefone = model.Telefone ,PhoneNumber = model.Telefone};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    // abaixo eu cadastro o papel de usuário comum  ao usuário que se registrou
+                    try
+                    {
+                        UserRoles db = new UserRoles();
+                        AspNetUserRoles userRole = new AspNetUserRoles();
+                        userRole.RoleId = "2"; // esta é a role que representa usuários comum
+                        userRole.UserId = user.Id;
+                        db.AspNetUserRoles.Add(userRole);
+                        db.SaveChanges();
+                    }catch(Exception e)
+                    {
+                        TempData["Mensagem"] = "Ocorreu um erro ao cadastrar  o papel deste usuário , erro:";
+                        TempData["tipo"] = "error";
+                        TempData["Erro"] = e.GetType().Name;
+                    }
+                    
+                    
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

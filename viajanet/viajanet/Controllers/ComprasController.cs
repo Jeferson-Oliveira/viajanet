@@ -58,6 +58,7 @@ namespace viajanet.Controllers
 
 
         // GET: Compras
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index()
         {
             var compra = db.Compra.Include(c => c.Hotel).Include(c => c.Viajem);
@@ -65,6 +66,7 @@ namespace viajanet.Controllers
         }
 
         // GET: Compras/Details/5
+        
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -80,6 +82,7 @@ namespace viajanet.Controllers
         }
 
         // GET: Compras/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.FK_Hotel = new SelectList(db.Hotel, "Id", "Nome");
@@ -105,7 +108,7 @@ namespace viajanet.Controllers
             ViewBag.FK_Viajem = new SelectList(db.Viajem, "Id", "Id", compra.FK_Viajem);
             return View(compra);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Compras/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
@@ -140,7 +143,7 @@ namespace viajanet.Controllers
             ViewBag.FK_Viajem = new SelectList(db.Viajem, "Id", "Id", compra.FK_Viajem);
             return View(compra);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Compras/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {

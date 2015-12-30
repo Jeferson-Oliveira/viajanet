@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNet.Identity
+ 
 @if (!User.Identity.IsAuthenticated)
 {
+    
     Response.Redirect("/Account/Login");
 }
 <!DOCTYPE html>
@@ -158,30 +160,37 @@
                                             <li><a href="@Url.Action("viewCompras", "Compras", new { user = User.Identity.GetUserId() })">Visualizar Minhas Compras</a></li>
                                         </ul>
                                     </li>
-                                    <li class="nav-separator">Hoteis e Viajens</li>
-                                    <li>
-                                        <a href="javascript:;"><i class="fa fa-building"></i><span>Hoteis</span></a>
-                                        <ul class="acc-menu">
-                                            <li><a href="@Url.Action("Create","Hotels")">Cadastrar Hoteis</a></li>
-                                            <li><a href="@Url.Action("Index","Hotels")">Visualizar Hoteis</a></li>
-                                            <li>
-                                                <a href="javascript:;"><i class="fa fa-bed"></i> <span>Quartos</span></a>
-                                                <ul class="acc-menu">
-                                                    <li><a href="@Url.Action("Create","Quartos")">Cadastrar Quartos</a></li>
-                                                    <li><a href="@Url.Action("Index", "Quartos")">Visualizar Quartos</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;"><i class="fa fa-plane"></i><span>Viajens</span></a>
-                                        <ul class="acc-menu">
-                                            <li><a href="@Url.Action("Create","Viajens")">Cadastrar Viajens</a></li>
-                                            <li><a href="@Url.Action("Index","Viajens")">Visualizar Viagens</a></li>
-                                            <li><a href="@Url.Action("procurarViajens","Viajens")">Comprar Viajens</a></li>
-                                        </ul>
-                                    </li>
 
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <!--Start: admin content-->
+
+                                        <li class="nav-separator">Hoteis e Viajens</li>
+                                        <li>
+                                            <a href="javascript:;"><i class="fa fa-building"></i><span>Hoteis</span></a>
+                                            <ul class="acc-menu">
+                                                <li><a href="@Url.Action("Create","Hotels")">Cadastrar Hoteis</a></li>
+                                                <li><a href="@Url.Action("Index","Hotels")">Visualizar Hoteis</a></li>
+                                                <li>
+                                                    <a href="javascript:;"><i class="fa fa-bed"></i> <span>Quartos</span></a>
+                                                    <ul class="acc-menu">
+                                                        <li><a href="@Url.Action("Create","Quartos")">Cadastrar Quartos</a></li>
+                                                        <li><a href="@Url.Action("Index", "Quartos")">Visualizar Quartos</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;"><i class="fa fa-plane"></i><span>Viajens</span></a>
+                                            <ul class="acc-menu">
+                                                <li><a href="@Url.Action("Create","Viajens")">Cadastrar Viajens</a></li>
+                                                <li><a href="@Url.Action("Index","Viajens")">Visualizar Viagens</a></li>
+                                                <li><a href="@Url.Action("procurarViajens","Viajens")">Comprar Viajens</a></li>
+                                            </ul>
+                                        </li>
+                                    <!--End: admin content-->
+                                    }
+                                    
 
                                 </ul>
                             </nav>

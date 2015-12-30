@@ -64,6 +64,16 @@ namespace viajanet.Models
 
     public class RegisterViewModel
     {
+        [Required(ErrorMessage = "O Seu Nome é obrigatório")]
+        public string Nome { get; set; }
+
+        [Required(ErrorMessage = "O Seu Sobrenome é obrigatório")]
+        public string Sobrenome { get; set; }
+
+        public string Telefone { get; set; }
+
+        public string Foto { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -77,7 +87,7 @@ namespace viajanet.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "A senha e a confirmação de senha são diferentes.")]
         public string ConfirmPassword { get; set; }
     }
 

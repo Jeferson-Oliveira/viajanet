@@ -7,18 +7,25 @@
 <html lang="pt-br">
 <head>
     <title>Cadastro</title>
+
+    <link href='http://fonts.googleapis.com/css?family=RobotoDraft:300,400,400italic,500,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/Content/assets/fonts/font-awesome/css/font-awesome.css" />
+
+    <!-- render css basic files-->
     @Styles.Render("~/Content/css")
+    <!-- end render css-->
     <!--Render jquery-->
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
     <!--Render plugins-->
+    @Scripts.Render("~/Content/assets/plugins")
     <!--Render moder-->
     @Scripts.Render("~/bundles/modernizr")
     <!--Render boot-->
     @Scripts.Render("~/bundles/bootstrap")
     <!--Render aplication-->
     @Scripts.Render("~/Content/assets/js")
-
+    @Scripts.Render("~/bundles/jqueryval")
 </head>
 <body style="padding-top:80px;">
     <div class="container" id="login-form">
@@ -33,6 +40,45 @@
                         {
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary("", new { @class = "text-danger" })
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            @Html.LabelFor(m => m.Nome, new { @class = "control-label sr-only" })
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-user"></i>
+                                                </span>
+                                                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @placeholder = "Nome" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            @Html.LabelFor(m => m.Sobrenome, new { @class = "control-label sr-only" })
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-user"></i>
+                                                </span>
+                                                @Html.TextBoxFor(m => m.Sobrenome, new { @class = "form-control", @placeholder = "Sobrenome" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label for="Telefone" class="control-label sr-only">Telefone</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-phone"></i>
+                                        </span>
+                                       <input type="tel" name="Telefone" class="form-control phone" placeholder="Telefone" />
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     @Html.LabelFor(m => m.Email, new { @class = "control-label sr-only" })
@@ -84,6 +130,28 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+
+           
+            // init masks
+            var maskBehavior = function (val) {
+                return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+            },
+            options = {
+                onKeyPress: function (val, e, field, options) {
+                    field.mask(maskBehavior.apply({}, arguments), options);
+                }
+            };
+
+            $('.phone').mask(maskBehavior, options);
+           
+            // end masks
+
+           
+    });
+    </script> 
 </body>
 
 </html>

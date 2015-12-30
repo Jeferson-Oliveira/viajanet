@@ -18,6 +18,7 @@ namespace viajanet.Controllers
         private ViajanetContext db = new ViajanetContext();
 
         // GET: Hotels
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index()
         {
             var hotel = db.Hotel.Include(h => h.Cidade).Include(h => h.Estado);
@@ -25,6 +26,7 @@ namespace viajanet.Controllers
         }
 
         // GET: Hotels/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -40,6 +42,7 @@ namespace viajanet.Controllers
         }
 
         // GET: Hotels/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.FK_Cidade = new SelectList(db.Cidade, "Id", "Nome");
@@ -187,6 +190,7 @@ namespace viajanet.Controllers
         }
 
         // GET: Hotels/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)

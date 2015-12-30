@@ -164,6 +164,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AplicationDBContextMigrations\201512230106527_InitialCreate.cs" />
+    <Compile Include="AplicationDBContextMigrations\201512230106527_InitialCreate.Designer.cs">
+      <DependentUpon>201512230106527_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AplicationDBContextMigrations\201512301959179_AddUserData.cs" />
+    <Compile Include="AplicationDBContextMigrations\201512301959179_AddUserData.Designer.cs">
+      <DependentUpon>201512301959179_AddUserData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AplicationDBContextMigrations\Configuration.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -189,6 +198,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetUserRoles.cs" />
     <Compile Include="Models\Cidade.cs" />
     <Compile Include="Models\Companhia.cs" />
     <Compile Include="Models\Compra.cs" />
@@ -197,6 +207,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Quarto.cs" />
+    <Compile Include="Models\UserRoles.cs" />
     <Compile Include="Models\ViajanetContext.cs" />
     <Compile Include="Models\Viajem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2565,6 +2576,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\card-master\src\scss\bourbon\" />
+    <Folder Include="Imagens\Usuarios\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -2575,6 +2587,12 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AplicationDBContextMigrations\201512230106527_InitialCreate.resx">
+      <DependentUpon>201512230106527_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AplicationDBContextMigrations\201512301959179_AddUserData.resx">
+      <DependentUpon>201512301959179_AddUserData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512291222509_InitialCreate.resx">
       <DependentUpon>201512291222509_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
